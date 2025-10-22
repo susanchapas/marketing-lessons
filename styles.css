@@ -139,11 +139,21 @@ body{
 
 /* Identity grid */
 .identity-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start}
-.swatches{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;row-gap:1.25rem}
-.swatch{height:90px;border-radius:8px;padding:0.75rem;color:var(--white);display:flex;flex-direction:column;justify-content:flex-end;position:relative;background:var(--swatch-bg,transparent)}
 
-/* Ensure the typography block sits under the color swatches (spanning the swatches grid) */
-.swatches .typography-style{grid-column:1 / -1;margin-top:0.75rem;color:var(--muted);}
+/* Make color swatches full-width (span the identity grid) and lay out as a single responsive row */
+.swatches{
+  display:flex;
+  flex-wrap:wrap; /* allow wrapping when needed, but keep one row on wide screens by sizing items */
+  gap:1rem;
+  width:100%;
+  grid-column:1 / -1; /* span both columns of the parent identity grid */
+  align-items:stretch;
+}
+
+.swatch{height:90px;border-radius:8px;padding:0.75rem;color:var(--white);display:flex;flex-direction:column;justify-content:flex-end;position:relative;background:var(--swatch-bg,transparent);flex:0 0 calc(25% - 0.75rem);min-width:140px;box-sizing:border-box}
+
+/* Ensure the typography block sits under the color swatches and spans full width */
+.swatches .typography-style{flex:0 0 100%;width:100%;order:99;margin-top:0.75rem;color:var(--muted);} 
 .swatch .tooltip{position:absolute;left:50%;transform:translate(-50%,6px);bottom:calc(100% + 0.5rem);padding:0.5rem 0.6rem;background:rgba(0,0,0,0.92);font-size:0.85rem;border-radius:6px;opacity:0;transition:opacity 180ms,transform 180ms;pointer-events:none;z-index:60;white-space:nowrap}
 .swatch:focus .tooltip,.swatch:hover .tooltip{opacity:1;transform:translate(-50%,0);pointer-events:auto}
 
@@ -199,6 +209,18 @@ body{
 @media (max-width:800px){
   .typical-imagery{grid-column:1 / -1}
   .typical-imagery .cards{grid-template-columns:1fr}
+}
+
+/* Responsive: two swatches per row on medium screens */
+@media (max-width:1100px){
+  .swatches{flex-wrap:wrap}
+  .swatch{flex:0 0 calc(50% - 0.75rem)}
+}
+
+/* On narrow screens show one swatch per row */
+@media (max-width:480px){
+  .swatches{flex-wrap:wrap}
+  .swatch{flex:0 0 100%;min-width:0;height:84px}
 }
 
 /* Thin ticker marquee (NYSE-like) - chromatic aberration layers */
