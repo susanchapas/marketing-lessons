@@ -152,6 +152,15 @@ body{
   border: 1px solid rgba(0,0,0,0.85);
 }
 
+/* Make the copy button visible on the white swatch: grey background with charcoal text */
+#visual-identity .swatch.light .copy-hex{
+  background:#e6e6e6;
+  color:#2E2E2E; /* charcoal text for visibility */
+  border:1px solid rgba(0,0,0,0.12);
+}
+#visual-identity .swatch.light .copy-hex:focus{
+  outline:3px solid rgba(0,0,0,0.14);
+}
 /* Swatch focus and copy UI */
 .swatch:focus{outline:3px solid rgba(255,0,0,0.12);outline-offset:4px}
 .swatch .swatch-hex{display:flex;gap:0.5rem;align-items:center;font-family:monospace}
@@ -175,24 +184,6 @@ body{
 .font-header{font-family:'Bebas Neue',sans-serif;letter-spacing:1px}
 .sample{font-size:1.1rem}
 .monospace .sample{font-family:'Anonymous Pro',monospace}
-
-/* Font showcase styles for Visual Identity */
-.font-showcase{background:linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.06));padding:1rem;border-radius:8px;border:1px solid rgba(255,255,255,0.04)}
-.fs-title{margin:0 0 0.45rem 0;font-family:'Bebas Neue',sans-serif;font-size:1rem;font-weight:600;letter-spacing:0.5px}
-.font-recs{margin:0 0 0.6rem 0}
-.font-recs dt{font-weight:600;margin-top:0.45rem}
-.font-recs dd{margin:0 0 0.5rem 0;color:rgba(255,255,255,0.9)}
-.fs-examples{margin:0 0 0.5rem 0;font-size:0.95rem}
-.font-examples{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem}
-.font-card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:0.8rem;border-radius:8px;border:1px solid rgba(255,255,255,0.03)}
-.font-name{font-weight:600;margin-bottom:0.25rem}
-.font-sample.large{font-family:'Bebas Neue',sans-serif;font-size:1.45rem;letter-spacing:0.6px;font-weight:600}
-.font-sample.mono{font-family:'Anonymous Pro',monospace;font-size:1rem}
-.font-note{margin-top:0.5rem;font-size:0.9rem;opacity:0.85}
-
-@media (max-width:800px){
-  .font-examples{grid-template-columns:1fr}
-}
 
 .imagery{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem}
 .img{background:linear-gradient(180deg,rgba(255,0,0,0.03),rgba(255,255,255,0.02));height:120px;border-radius:6px;display:flex;align-items:center;justify-content:center}
