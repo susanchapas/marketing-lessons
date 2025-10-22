@@ -161,6 +161,13 @@ body{
 .social-link{display:inline-flex;align-items:center;gap:0.5rem;padding:0.2rem 0.5rem;border-radius:4px}
 .social-link svg{width:18px;height:18px;fill:var(--white);opacity:0.95}
 
+/* Normalize social icons: use a dedicated class for easier per-icon tweaks */
+.social-icon{width:18px;height:18px;display:block}
+/* Scale LinkedIn slightly to visually match the other icons */
+.social-icon.icon-linkedin{transform:scale(0.86);transform-origin:center center}
+/* Slight vertical alignment nudge for Instagram to better match optical center */
+.social-icon.icon-instagram{transform:translateY(1px);transform-origin:center center}
+
 /* Footer social links: turn brand red on hover/focus for both text and icon */
 .footer-socials .social-link{transition:color 180ms var(--ease),transform 140ms,var(--ease);color:var(--white)}
 .footer-socials .social-link svg{transition:fill 180ms var(--ease),opacity 140ms var(--ease)}
