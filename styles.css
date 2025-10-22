@@ -89,6 +89,11 @@ body{
   letter-spacing: 1px;
 }
 
+/* Increase header sizes for legibility when using the condensed Bebas Neue face */
+.section h2 { font-size: clamp(1.6rem, 2.8vw, 2.8rem); line-height:1; }
+.section h3 { font-size: clamp(1.15rem, 2.0vw, 1.6rem); line-height:1.05; }
+.section h4 { font-size: clamp(1rem, 1.6vw, 1.25rem); line-height:1.1; }
+
 /* Keep the 'Application to Our Business Category' header on the body/monospace font */
 #application-title {
   font-family: 'Anonymous Pro', monospace;
