@@ -141,6 +141,9 @@ body{
 .identity-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start}
 .swatches{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;row-gap:1.25rem}
 .swatch{height:90px;border-radius:8px;padding:0.75rem;color:var(--white);display:flex;flex-direction:column;justify-content:flex-end;position:relative;background:var(--swatch-bg,transparent)}
+
+/* Ensure the typography block sits under the color swatches (spanning the swatches grid) */
+.swatches .typography-style{grid-column:1 / -1;margin-top:0.75rem;color:var(--muted);}
 .swatch .tooltip{position:absolute;left:50%;transform:translate(-50%,6px);bottom:calc(100% + 0.5rem);padding:0.5rem 0.6rem;background:rgba(0,0,0,0.92);font-size:0.85rem;border-radius:6px;opacity:0;transition:opacity 180ms,transform 180ms;pointer-events:none;z-index:60;white-space:nowrap}
 .swatch:focus .tooltip,.swatch:hover .tooltip{opacity:1;transform:translate(-50%,0);pointer-events:auto}
 
