@@ -82,6 +82,19 @@ body{
 .section--light{background:linear-gradient(180deg,rgba(46,46,46,0.8),rgba(0,0,0,0.9));}
 .lede{max-width:70ch;opacity:0.9}
 
+/* Section headers: use Bebas Neue for bold, condensed headlines across sections
+   except where explicitly overridden (see #application-title) */
+.section h2, .section h3, .section h4 {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 1px;
+}
+
+/* Keep the 'Application to Our Business Category' header on the body/monospace font */
+#application-title {
+  font-family: 'Anonymous Pro', monospace;
+  letter-spacing: normal;
+}
+
 /* Traits */
 .traits{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-top:2rem;padding:0;list-style:none}
 /* Keep trait cards a fixed height so revealing the description doesn't push content around */
