@@ -149,6 +149,7 @@ body{
   background: #ffffff;
   color: #000000;
   box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  border: 1px solid rgba(0,0,0,0.85);
 }
 
 /* Swatch focus and copy UI */
