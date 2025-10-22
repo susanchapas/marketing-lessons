@@ -172,6 +172,25 @@
   const year = document.getElementById('year');
   if(year) year.textContent = new Date().getFullYear();
 
+  // Ensure fresh loads without a hash land at the top (hero).
+  // Prevents browsers from restoring a previous scroll position on refresh/back
+  // while preserving normal anchor/hash behavior and back/forward navigation.
+  window.addEventListener('load', ()=>{
+    try{ if('scrollRestoration' in history) history.scrollRestoration = 'manual'; }catch(e){}
+    if(!location.hash){
+      // Try to detect back/forward navigations and avoid overriding them
+      let navType = null;
+      try{
+        const entries = performance.getEntriesByType && performance.getEntriesByType('navigation');
+        navType = entries && entries[0] && entries[0].type ? entries[0].type : (performance && performance.navigation ? performance.navigation.type : null);
+      }catch(e){}
+      // If not a back/forward navigation, scroll to top on initial load
+      if(navType !== 'back_forward'){
+        window.scrollTo({top:0,left:0,behavior: prefersReduced? 'auto':'auto'});
+      }
+    }
+  });
+
   // Accessibility: ensure focusable sections
   document.querySelectorAll('main section').forEach(sec=>{
     sec.setAttribute('tabindex','-1');
