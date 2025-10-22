@@ -35,6 +35,29 @@
   updateHeader();
   window.addEventListener('scroll', updateHeader, {passive:true});
 
+  // Mobile nav toggle (hamburger)
+  (function mobileNav(){
+    const navToggle = document.querySelector('.nav-toggle');
+    const primaryNav = document.getElementById('primary-nav');
+    if(!navToggle || !primaryNav) return;
+
+    function open(){ navToggle.setAttribute('aria-expanded','true'); primaryNav.setAttribute('data-open','true'); }
+    function close(){ navToggle.setAttribute('aria-expanded','false'); primaryNav.setAttribute('data-open','false'); }
+
+    navToggle.addEventListener('click', (e)=>{
+      const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+      if(isOpen) close(); else open();
+    });
+
+    // close on outside click
+    document.addEventListener('click', (e)=>{
+      if(!primaryNav.contains(e.target) && !navToggle.contains(e.target)) close();
+    });
+
+    // close on Escape
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') close(); });
+  })();
+
   // Ensure hero video plays; if autoplay is blocked, try to play after first user interaction
   const heroVideo = document.querySelector('.hero-video');
   function tryPlayVideo(){
@@ -210,6 +233,88 @@
 
     // close on Escape
     document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') close(); });
+  })();
+
+  // Focus trap + mobile accordion for sources dropdown
+  (function sourcesFocusTrap(){
+    const btn = document.querySelector('.sources-btn');
+    const dropdown = document.querySelector('.sources-dropdown');
+    const list = document.querySelector('.sources-list');
+    if(!btn || !dropdown || !list) return;
+
+    // helper: get focusable elements inside list
+    function focusableElements(container){
+      return Array.from(container.querySelectorAll('a, button, [tabindex]')).filter(el=>!el.hasAttribute('disabled'));
+    }
+
+    function trap(e){
+      if(!dropdown.classList.contains('open')) return;
+      const focusables = focusableElements(dropdown);
+      if(!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length-1];
+
+      if(e.key === 'Tab'){
+        if(e.shiftKey && document.activeElement === first){
+          e.preventDefault(); last.focus();
+        } else if(!e.shiftKey && document.activeElement === last){
+          e.preventDefault(); first.focus();
+        }
+      }
+    }
+
+    // when opening, focus first link and enable trap; when closing, restore focus to button
+    const observer = new MutationObserver(()=>{
+      if(dropdown.classList.contains('open')){
+        const focusables = focusableElements(dropdown);
+        if(focusables.length) focusables[0].focus();
+        document.addEventListener('keydown', trap);
+      } else {
+        document.removeEventListener('keydown', trap);
+        btn.focus();
+      }
+    });
+    observer.observe(dropdown, {attributes:true, attributeFilter:['class']});
+
+    // Mobile: accordion behavior — toggle expanded state per item on small screens
+    function enableAccordion(){
+      if(window.innerWidth > 480){
+        dropdown.classList.remove('accordion');
+        // ensure all items are visible normally
+        Array.from(list.querySelectorAll('li')).forEach(li=> li.removeAttribute('aria-expanded'));
+        return;
+      }
+      dropdown.classList.add('accordion');
+      Array.from(list.querySelectorAll('li')).forEach((li)=>{
+        const link = li.querySelector('a');
+        if(!link) return;
+        li.setAttribute('role','button');
+        li.setAttribute('tabindex','0');
+        // click or key activates toggle
+        function toggle(){ li.classList.toggle('expanded'); li.setAttribute('aria-expanded', li.classList.contains('expanded')?'true':'false'); }
+        li.addEventListener('click', (e)=>{ if(e.target.tagName.toLowerCase() === 'a') return; toggle(); });
+        li.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+      });
+    }
+
+    // initialize and on resize
+    enableAccordion();
+    window.addEventListener('resize', enableAccordion, {passive:true});
+  })();
+
+  // Trait description click-to-toggle for touch devices: toggle .expanded on click
+  (function traitToggles(){
+    const traits = Array.from(document.querySelectorAll('.trait'));
+    if(!traits.length) return;
+    traits.forEach(t=>{
+      t.addEventListener('click', (e)=>{
+        // if click is on a link inside trait, ignore
+        if(e.target && (e.target.tagName.toLowerCase() === 'a' || e.target.closest('a'))) return;
+        t.classList.toggle('expanded');
+      });
+      // ensure keyboard users can use Enter/Space
+      t.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); t.classList.toggle('expanded'); } });
+    });
   })();
 
 })();

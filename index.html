@@ -42,7 +42,14 @@
   <header id="site-header" class="header" role="banner">
     <div class="container header-inner">
   <a href="#hero" class="logo" aria-label="Outlaw brand archetype homepage">OUTLAW<span class="sr-only"> — Rules Were Made To Be Broken</span></a>
-      <nav role="navigation" aria-label="Primary" class="primary-nav">
+      <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="hamburger" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+      <nav id="primary-nav" role="navigation" aria-label="Primary" class="primary-nav">
         <ul>
           <li><a href="#definition">Definition</a></li>
           <li><a href="#visual-identity">Visual Identity</a></li>
@@ -84,6 +91,18 @@
           <li class="trait" tabindex="0"><svg class="icon trait-icon" aria-hidden="true"><use href="#icon-diamond"></use></svg><strong>Provocative</strong><span class="desc">Stirs emotion and incites action.</span></li>
           <li class="trait" tabindex="0"><svg class="icon trait-icon" aria-hidden="true"><use href="#icon-diamond"></use></svg><strong>Loyal</strong><span class="desc">Attracts fiercely committed fans.</span></li>
         </ul>
+        <!-- Additional archetype details -->
+        <div class="archetype-details" style="margin-top:1.25rem;display:grid;gap:0.75rem;">
+          <div class="panel" style="background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:0.85rem;border-radius:8px;">
+            <h4 style="margin:0 0 0.5rem 0;font-weight:700;">Core Motivation</h4>
+            <p style="margin:0;">To disrupt, destroy, or shock. The Outlaw craves revolution and wants to tear down the status quo or any structure they see as confining, inauthentic, or "the establishment."</p>
+          </div>
+
+          <div class="panel" style="background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:0.85rem;border-radius:8px;">
+            <h4 style="margin:0 0 0.5rem 0;font-weight:700;">Target Audience</h4>
+            <p style="margin:0;">Customers who feel alienated, disenfranchised, or constrained by "the system." They are often younger but it's more of a psychographic—they value independence, authenticity (even if it's raw), and see themselves as outsiders.</p>
+          </div>
+        </div>
       </div>
     </section>
 
