@@ -145,8 +145,25 @@ body{
 .implementation-content{background:linear-gradient(180deg,rgba(0,0,0,0.35),rgba(255,255,255,0.02));padding:1.25rem;margin-top:1rem;border-radius:8px}
 .impl-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:start}
 .impl-col h4{font-family:'Bebas Neue',sans-serif;margin:0 0 .5rem 0}
-.impl-list{margin:0;padding-left:1.25rem}
-.impl-list li{margin-bottom:0.65rem}
+
+/* Hero-style callouts */
+.impl-callouts{display:flex;flex-direction:column;gap:0.9rem}
+.impl-callout{background:linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.45));padding:1rem;border-radius:8px;border:1px solid rgba(215,38,61,0.12)}
+.impl-callout:before{content:'';display:block;height:6px;background:var(--red);border-radius:4px;margin:-0.75rem -0.75rem 0.5rem -0.75rem}
+.impl-callout .variant{display:none;color:var(--white);font-size:1.12rem;padding:0 0.25rem}
+.impl-callout .variant[data-variant="A"]{font-family:'Bebas Neue',sans-serif;font-size:1.3rem}
+.impl-callout.active .variant[data-variant="A"],
+.impl-callout.active .variant[data-variant="B"]{display:block}
+
+/* Variant controls */
+.impl-variant-controls{display:flex;gap:0.5rem;align-items:center;margin-bottom:0.75rem}
+.impl-variant-btn{background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--white);padding:0.25rem 0.55rem;border-radius:6px}
+.impl-variant-btn[aria-pressed="true"]{background:var(--red);border-color:var(--red);box-shadow:0 6px 18px rgba(215,38,61,0.12)}
+
+/* make callouts responsive */
+@media (max-width:800px){
+  .impl-grid{grid-template-columns:1fr}
+}
 
 @media (max-width:800px){
   .impl-grid{grid-template-columns:1fr}

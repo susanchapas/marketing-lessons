@@ -154,4 +154,31 @@
     sec.setAttribute('tabindex','-1');
   });
 
+  // Simple A/B toggle for implementation variants
+  (function implVariants(){
+    const buttons = Array.from(document.querySelectorAll('.impl-variant-btn'));
+    const callouts = Array.from(document.querySelectorAll('.impl-callout'));
+    if(!buttons.length || !callouts.length) return;
+
+    function setVariant(v){
+      // persist
+      try{ localStorage.setItem('implVariant', v); }catch(e){}
+  buttons.forEach(b=> b.setAttribute('aria-pressed', b.dataset.variant===v ? 'true':'false'));
+      // activate variants inside each callout
+      callouts.forEach(c=>{
+        // mark active to control display
+        c.classList.add('active');
+        Array.from(c.querySelectorAll('.variant')).forEach(el=>{
+          el.style.display = el.dataset.variant===v ? 'block':'none';
+        });
+      });
+    }
+
+    buttons.forEach(b=> b.addEventListener('click', ()=> setVariant(b.dataset.variant)));
+
+    // init
+    const saved = (function(){try{return localStorage.getItem('implVariant')}catch(e){return null}})() || 'A';
+    setVariant(saved);
+  })();
+
 })();

@@ -213,21 +213,34 @@
           </div>
           <div class="panel image reveal" role="img" aria-label="Chains and hardware texture">Chains visual</div>
         </div>
-        <!-- Added marketing message and product presentation ideas -->
-        <div class="implementation-content reveal" tabindex="0" aria-labelledby="impl-ideas-title">
-          <h3 id="impl-ideas-title">Marketing Message Ideas &amp; Product Presentation</h3>
+        <!-- Implementation callouts with A/B variants -->
+        <div class="implementation-content reveal" tabindex="0">
+          <div class="impl-variant-controls" aria-label="Variant selector">
+            <span class="muted">Variant:</span>
+            <button class="impl-variant-btn" data-variant="A" aria-pressed="true">A</button>
+            <button class="impl-variant-btn" data-variant="B" aria-pressed="false">B</button>
+          </div>
           <div class="impl-grid">
             <div class="impl-col">
               <h4>Marketing Message Ideas</h4>
-              <ul class="impl-list">
-                <li>&quot;Stop paying for <em>[common industry practice]</em>.&quot; <span class="muted">(Directly calls out the enemy)</span></li>
-                <li>&quot;You don't need our permission. Or anyone else's.&quot; <span class="muted">(Focuses on individual freedom)</span></li>
-              </ul>
+              <div class="impl-callouts">
+                <div class="impl-callout" data-key="msg1">
+                  <div class="variant" data-variant="A">"Stop paying for <em>[common industry practice]</em>." <span class="muted">(Directly calls out the enemy)</span></div>
+                  <div class="variant" data-variant="B">"Why keep paying for <em>[common industry practice]</em>? Take it back." <span class="muted">(Confrontational CTA)</span></div>
+                </div>
+
+                <div class="impl-callout" data-key="msg2">
+                  <div class="variant" data-variant="A">"You don't need our permission. Or anyone else's." <span class="muted">(Focuses on individual freedom)</span></div>
+                  <div class="variant" data-variant="B">"No permission required. Do it on your terms." <span class="muted">(Empowerment angle)</span></div>
+                </div>
+              </div>
             </div>
             <div class="impl-col">
               <h4>Product / Service Presentation</h4>
-              <p>Present it as the <strong>"uncensored"</strong> or <strong>"raw"</strong> version. Strip away the fluff. Use simple, bold packaging and copy that says exactly what it is.</p>
-              <p>Focus on what you don't have: <strong>&quot;No B.S.&quot;</strong> <strong>&quot;No Hidden Fees.&quot;</strong> <strong>&quot;No Corporate Jargon.&quot;</strong> The product itself becomes the antidote to the industry's complexity.</p>
+              <div class="impl-callout" data-key="presentation">
+                <div class="variant" data-variant="A">Present it as the "uncensored" or "raw" version — strip away the fluff. Simple, bold packaging. Focus on what you don't have: "No B.S." "No Hidden Fees." "No Corporate Jargon." The product is the antidote to industry complexity.</div>
+                <div class="variant" data-variant="B">Position the offering as the anti-industry product: unfiltered, direct, and honest. Use stark packaging, short declarative labels like "No B.S.", "No Hidden Fees" and sell the lack of noise as the feature.</div>
+              </div>
             </div>
           </div>
         </div>
