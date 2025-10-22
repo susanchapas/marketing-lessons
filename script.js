@@ -59,9 +59,9 @@
       // ensure video stays on last frame by pausing
       heroVideo.pause();
       videoCompleted = true;
-      // fade out the video visually (keeps last frame but hides via overlay)
-      heroVideo.classList.remove('play-visible');
-      heroVideo.classList.add('play-hidden');
+      // Do NOT fade out on end — keep the final frame visible.
+      heroVideo.classList.add('play-visible');
+      heroVideo.classList.remove('play-hidden');
     });
   }
 

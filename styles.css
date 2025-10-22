@@ -61,7 +61,7 @@ body{
 .trait:focus,.trait:hover{transform:translateY(-6px);box-shadow:0 8px 30px rgba(0,0,0,0.6);outline:3px solid rgba(255,0,0,0.12)}
 
 /* Trait icons and layout */
-.trait{display:flex;align-items:center;gap:0.75rem}
+.trait{display:flex;align-items:flex-start;gap:0.75rem}
 .trait-icon{width:28px;height:28px;flex:0 0 28px;fill:var(--red);opacity:0.95}
 
 /* HERO MEDIA styles (video background) */
@@ -74,6 +74,11 @@ body{
 /* Social icon links */
 .social-link{display:inline-flex;align-items:center;gap:0.5rem;padding:0.2rem 0.5rem;border-radius:4px}
 .social-link svg{width:18px;height:18px;fill:var(--white);opacity:0.95}
+
+/* Footer socials placement: center the social links above copyright */
+.footer-socials{display:flex;justify-content:center;gap:1rem;padding-top:0.5rem;padding-bottom:0.5rem}
+.footer-socials .social-link{display:inline-flex;align-items:center;gap:0.5rem;padding:0.25rem 0.6rem}
+.footer .copyright{margin-top:0.25rem}
 
 @media (max-width:800px){
   /* Add spacing to prevent tooltip overlap and improve mobile rhythm */
@@ -120,7 +125,7 @@ body{
 
 /* Image-card variant: background image with overlay that reveals on hover/focus */
 .image-card{background-size:cover;background-position:center;position:relative;padding:0;min-height:220px;overflow:hidden;border-radius:8px}
-.image-card .card-overlay{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(0deg, rgba(0,0,0,.92) 0%, rgba(0,0,0,.45) 45%, rgba(0,0,0,0) 100%);color:var(--white);padding:1rem;transform:translateY(100%);transition:transform .34s cubic-bezier(.2,.9,.2,1)}
+.image-card .card-overlay{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(0deg, rgba(0,0,0,.98) 0%, rgba(0,0,0,.85) 45%, rgba(0,0,0,0) 100%);color:var(--white);padding:1rem;transform:translateY(100%);transition:transform .34s cubic-bezier(.2,.9,.2,1)}
 .image-card:hover .card-overlay,.image-card:focus-within .card-overlay,.image-card:focus .card-overlay{transform:translateY(0%)}
 .image-card a{color:var(--white);font-weight:700;text-decoration:underline}
 .image-card:focus{outline:3px solid rgba(255,0,0,0.14);outline-offset:3px}
@@ -157,6 +162,24 @@ body{
   .split{grid-template-columns:1fr}
   .header .header-inner{padding:0.6rem 0.8rem}
   .footer-inner{flex-direction:column}
+}
+
+/* Mobile nav: allow wrapping so links don't get cut off */
+@media (max-width:600px){
+  .primary-nav ul{flex-wrap:wrap;gap:0.5rem}
+  .primary-nav{margin-top:0.2rem}
+  .primary-nav a{font-size:0.95rem;padding:0.3rem 0.5rem}
+}
+
+/* Slightly reduce header logo size on very small devices so it doesn't compete with nav */
+@media (max-width:420px){
+  .logo{font-size:1.2rem}
+}
+
+/* Ensure trait text can wrap cleanly on narrow viewports */
+@media (max-width:420px){
+  .trait strong{font-size:0.98rem}
+  .trait .desc{font-size:0.9rem}
 }
 
 /* Utility: screen reader only */
