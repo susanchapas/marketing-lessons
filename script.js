@@ -283,15 +283,28 @@
     }
 
     // when opening, focus first link and enable trap; when closing, restore focus to button
+    let wasOpen = dropdown.classList.contains('open');
     const observer = new MutationObserver(()=>{
-      if(dropdown.classList.contains('open')){
+      const isOpen = dropdown.classList.contains('open');
+      if(isOpen && !wasOpen){
+        // just opened
         const focusables = focusableElements(dropdown);
         if(focusables.length) focusables[0].focus();
         document.addEventListener('keydown', trap);
-      } else {
+      } else if(!isOpen && wasOpen){
+        // just closed
         document.removeEventListener('keydown', trap);
-        btn.focus();
+        // Only restore focus to the button if focus is still inside the dropdown
+        // (e.g., user pressed Escape). If the user clicked outside, leave focus
+        // where the click occurred to avoid jumping to the footer.
+        try{
+          const active = document.activeElement;
+          if(dropdown.contains(active) || active === document.body || active === null){
+            btn.focus();
+          }
+        }catch(e){}
       }
+      wasOpen = isOpen;
     });
     observer.observe(dropdown, {attributes:true, attributeFilter:['class']});
 
