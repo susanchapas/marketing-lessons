@@ -133,7 +133,7 @@ body{
   background:linear-gradient(180deg, rgba(255,0,0,0.10), rgba(255,0,0,0.04));
   border:1px solid rgba(255,0,0,0.18);
 }
-#definition .trait-icon{fill:var(--white);}
+#definition .trait-icon{fill:var(--red);} 
 #definition .trait .desc{color:rgba(255,255,255,0.95);}
 /* Archetype detail panels: keep inline styles (do not override) */
 
