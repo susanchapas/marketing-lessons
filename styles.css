@@ -144,6 +144,16 @@ body{
 .swatch .tooltip{position:absolute;left:50%;transform:translate(-50%,6px);bottom:calc(100% + 0.5rem);padding:0.5rem 0.6rem;background:rgba(0,0,0,0.92);font-size:0.85rem;border-radius:6px;opacity:0;transition:opacity 180ms,transform 180ms;pointer-events:none;z-index:60;white-space:nowrap}
 .swatch:focus .tooltip,.swatch:hover .tooltip{opacity:1;transform:translate(-50%,0);pointer-events:auto}
 
+/* Swatch focus and copy UI */
+.swatch:focus{outline:3px solid rgba(255,0,0,0.12);outline-offset:4px}
+.swatch .swatch-hex{display:flex;gap:0.5rem;align-items:center;font-family:monospace}
+.copy-hex{background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--white);padding:0.18rem 0.45rem;border-radius:6px;font-size:0.85rem;cursor:pointer}
+.copy-hex:focus{outline:3px solid rgba(255,0,0,0.14)}
+
+/* Make image-card overlay text visible on hover or keyboard focus */
+.image-card .card-overlay{transform:translateY(100%);opacity:0}
+.image-card:hover .card-overlay,.image-card:focus-within .card-overlay,.image-card:focus .card-overlay{transform:translateY(0%);opacity:1}
+
 /* If the swatch is near the top or on very small screens, show tooltip below instead */
 @media (max-width:420px){
   .swatch .tooltip{bottom:auto;top:calc(100% + 0.35rem);transform:translate(-50%,-6px)}

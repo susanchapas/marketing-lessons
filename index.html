@@ -38,6 +38,7 @@
 
   <!-- Scroll progress indicator -->
   <div id="scroll-progress" aria-hidden="true"></div>
+  <div id="clipboard-live" class="sr-only" aria-live="polite"></div>
 
   <!-- HEADER: fixed, transparent until scroll -->
   <header id="site-header" class="header" role="banner">
@@ -114,25 +115,29 @@
   <p class="lede">Colors, type, and imagery that express the Outlaw mood.</p>
         <div class="identity-grid">
           <div class="swatches" aria-label="Color palette">
-              <div class="swatch" style="--swatch-bg:#000000;" tabindex="0">
+              <div class="swatch" style="--swatch-bg:#000000;" tabindex="0" aria-describedby="swatch-black-contrast">
                 <span class="swatch-name">Black</span>
-                <span class="swatch-hex">#000000</span>
+                <div class="swatch-hex"><span>#000000</span><button class="copy-hex" data-hex="#000000" aria-label="Copy hex #000000">Copy</button></div>
                 <div class="tooltip">Primary background — use liberally for drama.</div>
+                <div id="swatch-black-contrast" class="sr-only">Contrast vs white: 21:1 (AAA)</div>
               </div>
-              <div class="swatch" style="--swatch-bg:#FF0000;" tabindex="0">
+              <div class="swatch" style="--swatch-bg:#FF0000;" tabindex="0" aria-describedby="swatch-red-contrast">
                 <span class="swatch-name">Red</span>
-                <span class="swatch-hex">#FF0000</span>
+                <div class="swatch-hex"><span>#FF0000</span><button class="copy-hex" data-hex="#FF0000" aria-label="Copy hex #FF0000">Copy</button></div>
                 <div class="tooltip">Accent — aggressive, high-impact calls to action.</div>
+                <div id="swatch-red-contrast" class="sr-only">Contrast vs white: 4.0:1 (AA Large)</div>
               </div>
-              <div class="swatch" style="--swatch-bg:#2E2E2E;" tabindex="0">
+              <div class="swatch" style="--swatch-bg:#2E2E2E;" tabindex="0" aria-describedby="swatch-charcoal-contrast">
                 <span class="swatch-name">Charcoal</span>
-                <span class="swatch-hex">#2E2E2E</span>
+                <div class="swatch-hex"><span>#2E2E2E</span><button class="copy-hex" data-hex="#2E2E2E" aria-label="Copy hex #2E2E2E">Copy</button></div>
                 <div class="tooltip">Secondary surfaces and panels.</div>
+                <div id="swatch-charcoal-contrast" class="sr-only">Contrast vs white: 9.6:1 (AAA)</div>
               </div>
-              <div class="swatch light" style="--swatch-bg:#FFFFFF; color:#000;" tabindex="0">
+              <div class="swatch light" style="--swatch-bg:#FFFFFF; color:#000;" tabindex="0" aria-describedby="swatch-white-contrast">
                 <span class="swatch-name">White</span>
-                <span class="swatch-hex">#FFFFFF</span>
+                <div class="swatch-hex"><span>#FFFFFF</span><button class="copy-hex" data-hex="#FFFFFF" aria-label="Copy hex #FFFFFF">Copy</button></div>
                 <div class="tooltip">Type and accents to create contrast.</div>
+                <div id="swatch-white-contrast" class="sr-only">Contrast vs black: 21:1 (AAA)</div>
               </div>
           </div>
 
@@ -154,19 +159,25 @@
           <div class="typical-imagery" style="margin-top:1.25rem;">
             <h3 style="margin:0 0 0.5rem 0;">Typical Imagery</h3>
             <div class="cards" role="list" aria-label="Typical imagery examples">
-              <article class="card reveal" role="listitem" tabindex="0">
-                <h4>Gritty, Urban Environments</h4>
-                <p>Alleys, concrete walls, graffiti, chain-link fences. It’s the opposite of a polished, corporate office.</p>
+              <article class="card image-card reveal" role="listitem" tabindex="0" style="background-image:url('sources/gritty-urban.jpg')" aria-label="Gritty, Urban Environments">
+                <div class="card-overlay">
+                  <h4>Gritty, Urban Environments</h4>
+                  <p>Alleys, concrete walls, graffiti, chain-link fences. It’s the opposite of a polished, corporate office.</p>
+                </div>
               </article>
 
-              <article class="card reveal" role="listitem" tabindex="0">
-                <h4>Unfiltered Portraits</h4>
-                <p>"Real" people, not models. Tattoos, piercings, intense stares, imperfect features. A focus on raw human expression.</p>
+              <article class="card image-card reveal" role="listitem" tabindex="0" style="background-image:url('sources/portrait.jpg')" aria-label="Unfiltered Portraits">
+                <div class="card-overlay">
+                  <h4>Unfiltered Portraits</h4>
+                  <p>"Real" people, not models. Tattoos, piercings, intense stares, imperfect features. A focus on raw human expression.</p>
+                </div>
               </article>
 
-              <article class="card reveal" role="listitem" tabindex="0">
-                <h4>Symbols of Disruption</h4>
-                <p>Shattered glass, X-marks, barbed wire, protest imagery, a single fist raised.</p>
+              <article class="card image-card reveal" role="listitem" tabindex="0" style="background-image:url('sources/shattered-glass.jpeg')" aria-label="Symbols of Disruption">
+                <div class="card-overlay">
+                  <h4>Symbols of Disruption</h4>
+                  <p>Shattered glass, X-marks, barbed wire, protest imagery, a single fist raised.</p>
+                </div>
               </article>
             </div>
 

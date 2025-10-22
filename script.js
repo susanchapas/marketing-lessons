@@ -334,6 +334,32 @@
     window.addEventListener('resize', enableAccordion, {passive:true});
   })();
 
+  // Swatch copy-to-clipboard and live announcement
+  (function swatchCopy(){
+    const live = document.getElementById('clipboard-live');
+    const buttons = Array.from(document.querySelectorAll('.copy-hex'));
+    if(!buttons.length) return;
+
+    function announce(msg){ if(live) live.textContent = msg; }
+
+    buttons.forEach(btn=>{
+      btn.addEventListener('click', async (e)=>{
+        const hex = btn.dataset.hex;
+        try{
+          if(navigator.clipboard && navigator.clipboard.writeText){
+            await navigator.clipboard.writeText(hex);
+          } else {
+            // fallback: execCommand
+            const ta = document.createElement('textarea'); ta.value = hex; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+          }
+          announce(`${hex} copied to clipboard`);
+        }catch(err){ announce('Unable to copy color'); }
+      });
+      // keyboard activation for accessibility
+      btn.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); } });
+    });
+  })();
+
   // Trait description click-to-toggle for touch devices: toggle .expanded on click
   (function traitToggles(){
     const traits = Array.from(document.querySelectorAll('.trait'));
