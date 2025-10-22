@@ -363,7 +363,7 @@ body{
 /* Hero-style callouts */
 .impl-callouts{display:flex;flex-direction:column;gap:0.9rem}
 .impl-callout{background:linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.45));padding:1rem;border-radius:8px;border:1px solid rgba(215,38,61,0.12)}
-.impl-callout:before{content:'';display:block;height:6px;background:var(--red);border-radius:4px;margin:-0.75rem -0.75rem 0.5rem -0.75rem}
+.impl-callout:before{content:'';display:block;height:2px;background:var(--red);border-radius:2px;margin:-0.5rem -0.75rem 0.6rem -0.75rem}
 .impl-callout .variant{display:none;color:var(--white);font-size:1.12rem;padding:0 0.25rem}
 .impl-callout .variant[data-variant="A"]{font-family:inherit;font-size:1.15rem;font-weight:700;text-transform:none}
 .impl-callout.active .variant[data-variant="A"],
