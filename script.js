@@ -349,4 +349,67 @@
     });
   })();
 
+  // Ticker setup: ensure each ticker-track is long enough for a seamless -50% loop
+  (function tickerSetup(){
+    if(typeof window === 'undefined') return;
+    const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduced) return; // don't animate or measure when reduced motion is requested
+
+    const tracks = Array.from(document.querySelectorAll('.ticker-layer .ticker-track'));
+    if(!tracks.length) return;
+
+    function fillTracks(){
+      const pxPerSec = 80; // visual speed in pixels per second (changeable)
+      tracks.forEach(track=>{
+        // cancel any previous WA animation
+        try{ if(track._tickerAnim) track._tickerAnim.cancel(); }catch(e){}
+
+        const parent = track.parentElement || track;
+        const parentWidth = parent.clientWidth || document.documentElement.clientWidth || window.innerWidth;
+
+        // store original markup so we can rebuild on resize without infinite cloning
+        if(!track.dataset.orig) track.dataset.orig = track.innerHTML;
+        // restore original
+        track.innerHTML = track.dataset.orig;
+
+        // duplicate content until track.scrollWidth >= parentWidth * 2 (required for translateX(-50%) seamless loop)
+        let guard = 0;
+        while(track.scrollWidth < parentWidth * 2 && guard < 60){
+          const items = Array.from(track.children).map(n => n.cloneNode(true));
+          items.forEach(i => track.appendChild(i));
+          guard++;
+        }
+        track.dataset.filled = 'true';
+
+        // disable any CSS animation on the track so WA controls the transform
+        track.style.animation = 'none';
+
+        // compute pixel distance to move (half the track width)
+        const distance = Math.round(track.scrollWidth / 2);
+        // compute duration so all tracks move at same px/sec speed
+        const duration = Math.max(4000, Math.round((distance / pxPerSec) * 1000));
+
+        // create web animation for a seamless loop: translateX(0) -> translateX(-distance px)
+        try{
+          track._tickerAnim = track.animate([
+            { transform: 'translateX(0px)' },
+            { transform: `translateX(-${distance}px)` }
+          ], { duration: duration, iterations: Infinity, easing: 'linear' });
+        }catch(e){
+          // fallback: set CSS animation duration proportionally
+          track.style.animationDuration = (duration/1000) + 's';
+        }
+      });
+    }
+
+    // debounce helper
+    function debounce(fn, wait){ let t; return function(){ clearTimeout(t); t = setTimeout(fn, wait); }; }
+
+    // run on load and resize
+    window.addEventListener('load', fillTracks);
+    window.addEventListener('resize', debounce(fillTracks, 140));
+    // run once now in case content is ready
+    fillTracks();
+  })();
+
 })();
