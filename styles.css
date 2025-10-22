@@ -163,11 +163,11 @@ body{
 }
 
 /* Thin ticker marquee (NYSE-like) - chromatic aberration layers */
-.ticker-marquee{position:relative;width:100vw;left:50%;margin-left:-50vw;overflow:hidden;margin-top:0.6rem;height:3.2rem;background:rgba(255,255,255,0.03)}
+.ticker-marquee{position:relative;width:100vw;left:50%;margin-left:-50vw;overflow:hidden;margin-top:1.25rem;padding-top:0.6rem;height:2.2rem;background:rgba(255,255,255,0.03)}
 .ticker-layer{position:absolute;left:0;right:0;top:0;bottom:0;pointer-events:none;overflow:hidden}
-.ticker-track{display:flex;align-items:center;height:100%;gap:1.2rem;padding-left:0}
-.tick-item{display:inline-flex;align-items:center;justify-content:center;min-width:36px}
-.tick-icon{width:16px;height:16px;fill:#ffffff;opacity:0.95}
+.ticker-track{display:flex;align-items:center;height:100%;gap:1rem;padding-left:0}
+.tick-item{display:inline-flex;align-items:center;justify-content:center;min-width:32px}
+.tick-icon{width:14px;height:14px;fill:#ffffff;opacity:0.95}
 
 .ticker-layer.layer-r .ticker-track{animation:tick-scroll 12s linear infinite}
 .ticker-layer.layer-g .ticker-track{animation:tick-scroll 14s linear infinite}
