@@ -8,6 +8,14 @@
   --ease: cubic-bezier(.2,.9,.3,1);
 }
 
+/* Global neutralization of <strong> — visual emphasis removed site-wide */
+strong{
+  font-weight: inherit;
+  font-family: inherit;
+  font-style: inherit;
+  text-transform: none;
+}
+
 /* Dark default */
 html,body{height:100%;}
 body{
@@ -144,14 +152,14 @@ body{
 /* Implementation content styles */
 .implementation-content{background:linear-gradient(180deg,rgba(0,0,0,0.35),rgba(255,255,255,0.02));padding:1.25rem;margin-top:1rem;border-radius:8px}
 .impl-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:start}
-.impl-col h4{font-family:'Bebas Neue',sans-serif;margin:0 0 .5rem 0}
+.impl-col h4{font-family:inherit;margin:0 0 .5rem 0;font-weight:700;text-transform:none}
 
 /* Hero-style callouts */
 .impl-callouts{display:flex;flex-direction:column;gap:0.9rem}
 .impl-callout{background:linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.45));padding:1rem;border-radius:8px;border:1px solid rgba(215,38,61,0.12)}
 .impl-callout:before{content:'';display:block;height:6px;background:var(--red);border-radius:4px;margin:-0.75rem -0.75rem 0.5rem -0.75rem}
 .impl-callout .variant{display:none;color:var(--white);font-size:1.12rem;padding:0 0.25rem}
-.impl-callout .variant[data-variant="A"]{font-family:'Bebas Neue',sans-serif;font-size:1.3rem}
+.impl-callout .variant[data-variant="A"]{font-family:inherit;font-size:1.15rem;font-weight:700;text-transform:none}
 .impl-callout.active .variant[data-variant="A"],
 .impl-callout.active .variant[data-variant="B"]{display:block}
 
@@ -163,6 +171,15 @@ body{
 /* make callouts responsive */
 @media (max-width:800px){
   .impl-grid{grid-template-columns:1fr}
+}
+
+/* Ensure any <strong> inside the implementation section is visually neutral */
+#implementation strong, .implementation-content strong{
+  font-weight: inherit !important;
+  font-family: inherit !important;
+  text-transform: none !important;
+  font-style: inherit !important;
+  color: inherit !important;
 }
 
 @media (max-width:800px){
