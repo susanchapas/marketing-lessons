@@ -141,6 +141,17 @@ body{
 .panel{background:linear-gradient(180deg,rgba(255,0,0,0.02),rgba(255,255,255,0.01));padding:1.25rem;border-radius:8px}
 .panel.image{display:flex;align-items:center;justify-content:center;height:140px}
 
+/* Implementation content styles */
+.implementation-content{background:linear-gradient(180deg,rgba(0,0,0,0.35),rgba(255,255,255,0.02));padding:1.25rem;margin-top:1rem;border-radius:8px}
+.impl-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:start}
+.impl-col h4{font-family:'Bebas Neue',sans-serif;margin:0 0 .5rem 0}
+.impl-list{margin:0;padding-left:1.25rem}
+.impl-list li{margin-bottom:0.65rem}
+
+@media (max-width:800px){
+  .impl-grid{grid-template-columns:1fr}
+}
+
 /* Footer */
 .footer{padding:2rem 0;background:linear-gradient(180deg,rgba(0,0,0,0.9),rgba(14,14,14,1));color:var(--white);}
 .footer-inner{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem}
