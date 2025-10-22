@@ -89,7 +89,7 @@ body{
 .trait strong{display:block;font-family:inherit;font-size:1rem;line-height:1.15;text-transform:none;font-weight:700;margin:0}
 /* Position the description absolutely under the title so revealing it doesn't change layout */
 .trait .desc{position:absolute;left:calc(22px + 0.75rem);right:1rem;top:42px;display:block;opacity:0;visibility:hidden;margin:0;font-size:0.95rem;line-height:1.25;transition:opacity 200ms var(--ease),visibility 200ms}
-.trait:focus,.trait:hover{transform:translateY(-4px);box-shadow:0 10px 32px rgba(0,0,0,0.6)}
+.trait:focus,.trait:hover{transform:translateY(-4px);box-shadow:0 18px 48px rgba(200,0,0,0.18), 0 6px 26px rgba(0,0,0,0.6);border:1px solid rgba(255,0,0,0.12)}
 
 /* Show trait description on hover/focus or when explicitly expanded (for touch) */
 
@@ -176,8 +176,8 @@ body{
 
 /* Image-card variant: background image with overlay that reveals on hover/focus */
 .image-card{background-size:cover;background-position:center;position:relative;padding:0;min-height:220px;overflow:hidden;border-radius:8px}
-.image-card .card-overlay{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(0deg, rgba(0,0,0,.98) 0%, rgba(0,0,0,.85) 45%, rgba(0,0,0,0) 100%);color:var(--white);padding:1rem;transform:translateY(100%);transition:transform .34s cubic-bezier(.2,.9,.2,1)}
-.image-card:hover .card-overlay,.image-card:focus-within .card-overlay,.image-card:focus .card-overlay{transform:translateY(0%)}
+.image-card .card-overlay{position:absolute;left:0;right:0;top:0;bottom:0;background:rgba(0,0,0,0.88);color:var(--white);padding:1rem;transform:translateY(100%);transition:transform .34s cubic-bezier(.2,.9,.2,1),opacity .2s}
+.image-card:hover .card-overlay,.image-card:focus-within .card-overlay,.image-card:focus .card-overlay{transform:translateY(0%);opacity:1}
 .image-card a{color:var(--white);font-weight:700;text-decoration:underline}
 .image-card:focus{outline:3px solid rgba(255,0,0,0.14);outline-offset:3px}
 
@@ -240,10 +240,11 @@ body{
 .sources-btn{background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--white);padding:0.5rem 0.9rem;border-radius:8px}
 .sources-btn:focus{outline:3px solid rgba(255,0,0,0.12)}
 .sources-list{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 8px);background:rgba(0,0,0,0.95);border-radius:6px;padding:0.25rem 0;list-style:none;margin:0;min-width:260px;box-shadow:0 12px 40px rgba(0,0,0,0.6);display:none;z-index:120}
-.sources-list li{padding:0.45rem 0.8rem;border-top:1px solid rgba(255,255,255,0.03)}
+.sources-list li{padding:0;border-top:1px solid rgba(255,255,255,0.03)}
 .sources-list li:first-child{border-top:0}
-.sources-list a{color:var(--white);text-decoration:none;display:block}
-.sources-list li:hover{background:rgba(255,255,255,0.02)}
+.sources-list a{color:var(--white);text-decoration:none;display:block;padding:0.6rem 0.9rem;border-radius:6px;margin:0.25rem 0;background:rgba(255,255,255,0.02);transition:background .18s,transform .12s}
+.sources-list a:focus{outline:3px solid rgba(255,0,0,0.12);transform:translateY(-1px)}
+.sources-list a:hover{background:rgba(255,255,255,0.04);transform:translateY(-1px)}
 .sources-dropdown.open .sources-list{display:block}
 
 /* Mobile: make dropdown behave like a stacked accordion under the button */
