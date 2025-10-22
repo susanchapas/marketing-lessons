@@ -134,6 +134,17 @@ body{
   border:1px solid rgba(255,0,0,0.18);
 }
 #definition .trait-icon{fill:var(--red);} 
+#definition .trait-icon, #definition .trait svg, #definition .trait use {
+  /* ensure icons referenced via <use> or currentColor render red */
+  fill: var(--red) !important;
+  color: var(--red) !important;
+}
+
+/* Implementation panel icons (placeholders): larger, subtle drop-shadow, and hover animation */
+.panel.image svg.impl-icon{width:120px;height:120px;display:block;margin:0 auto;filter:drop-shadow(0 8px 18px rgba(0,0,0,0.6));transition:transform 220ms var(--ease),filter 220ms var(--ease),opacity 180ms}
+.panel.image svg.impl-icon path{fill:var(--red)}
+.panel.image:hover svg.impl-icon,
+.panel.image:focus-within svg.impl-icon{transform:translateY(-6px) scale(1.06);filter:drop-shadow(0 12px 28px rgba(0,0,0,0.65))}
 #definition .trait .desc{color:rgba(255,255,255,0.95);}
 /* Archetype detail panels: keep inline styles (do not override) */
 
