@@ -152,6 +152,16 @@ body{
 .imagery{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem}
 .img{background:linear-gradient(180deg,rgba(255,0,0,0.03),rgba(255,255,255,0.02));height:120px;border-radius:6px;display:flex;align-items:center;justify-content:center}
 
+/* Typical imagery placed under the color palette (left column) and responsive */
+.typical-imagery{grid-column:1 / -1;text-align:left}
+.typical-imagery .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0.75rem;margin-top:0.6rem}
+.typical-imagery .card{padding:0.9rem}
+
+@media (max-width:800px){
+  .typical-imagery{grid-column:1 / -1}
+  .typical-imagery .cards{grid-template-columns:1fr}
+}
+
 /* Split voice */
 .split{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
 .slogan-rotator{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;display:block;position:relative;height:3rem;overflow:hidden}
