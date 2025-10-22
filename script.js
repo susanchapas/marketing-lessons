@@ -368,8 +368,19 @@
         const parentWidth = parent.clientWidth || document.documentElement.clientWidth || window.innerWidth;
 
         // store original markup so we can rebuild on resize without infinite cloning
-        if(!track.dataset.orig) track.dataset.orig = track.innerHTML;
-        // restore original
+        if(!track.dataset.orig){
+          // try to detect a doubled sequence and store the minimal base unit
+          const children = Array.from(track.children);
+          if(children.length > 1 && children.length % 2 === 0){
+            const half = children.length / 2;
+            const first = children.slice(0, half).map(n => n.outerHTML).join('');
+            const second = children.slice(half).map(n => n.outerHTML).join('');
+            track.dataset.orig = (first === second) ? first : track.innerHTML;
+          } else {
+            track.dataset.orig = track.innerHTML;
+          }
+        }
+        // restore canonical original (non-duplicated) before duplicating
         track.innerHTML = track.dataset.orig;
 
         // duplicate content until track.scrollWidth >= parentWidth * 2 (required for translateX(-50%) seamless loop)

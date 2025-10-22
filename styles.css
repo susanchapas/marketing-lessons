@@ -173,9 +173,12 @@ body{
 .ticker-layer.layer-g .ticker-track{animation:tick-scroll 14s linear infinite}
 .ticker-layer.layer-b .ticker-track{animation:tick-scroll 16s linear infinite}
 
-.ticker-layer.layer-r{color:#ff4d4d;filter:drop-shadow(0 0 6px rgba(255,0,0,0.22))}
-.ticker-layer.layer-g{color:#33ff88;filter:drop-shadow(0 0 6px rgba(0,255,128,0.12))}
-.ticker-layer.layer-b{color:#66ccff;filter:drop-shadow(0 0 6px rgba(0,128,255,0.12))}
+.ticker-layer.layer-r{color:transparent;filter:none}
+.ticker-layer.layer-g{color:transparent;filter:none}
+.ticker-layer.layer-b{color:transparent;filter:none}
+
+/* Ensure ticker icons always render white regardless of parent layer color */
+.ticker-track svg, .tick-item svg, .tick-item use{fill:#ffffff !important; color:transparent !important}
 
 @keyframes tick-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
