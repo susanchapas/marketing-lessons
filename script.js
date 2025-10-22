@@ -181,4 +181,35 @@
     setVariant(saved);
   })();
 
+  // Footer research sources dropdown behavior
+  (function sourcesDropdown(){
+    const btn = document.querySelector('.sources-btn');
+    const dropdown = document.querySelector('.sources-dropdown');
+    const list = document.querySelector('.sources-list');
+    if(!btn || !dropdown || !list) return;
+
+    function open(){
+      dropdown.classList.add('open');
+      btn.setAttribute('aria-expanded','true');
+      list.hidden = false;
+    }
+    function close(){
+      dropdown.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+      list.hidden = true;
+    }
+
+    btn.addEventListener('click', (e)=>{
+      if(dropdown.classList.contains('open')) close(); else open();
+    });
+
+    // close on outside click
+    document.addEventListener('click', (e)=>{
+      if(!dropdown.contains(e.target)) close();
+    });
+
+    // close on Escape
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') close(); });
+  })();
+
 })();

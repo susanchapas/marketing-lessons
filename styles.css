@@ -71,6 +71,9 @@ body{
 /* Trait icons and layout */
 .trait{display:flex;align-items:flex-start;gap:0.75rem}
 .trait-icon{width:28px;height:28px;flex:0 0 28px;fill:var(--red);opacity:0.95}
+/* Ensure diamond icons use the brand red and are centered */
+.trait-icon{fill:var(--red);width:22px;height:22px}
+.trait svg{display:block}
 
 /* HERO MEDIA styles (video background) */
 .hero-media{position:absolute;inset:0;z-index:0;overflow:hidden}
@@ -123,6 +126,15 @@ body{
 .slogan-rotator{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;display:block;position:relative;height:3rem;overflow:hidden}
 .slogan-rotator .slogan{display:block;position:absolute;left:0;right:0;top:0;transform:translateY(100%);opacity:0;transition:transform 420ms var(--ease),opacity 420ms}
 .slogan-rotator .slogan.active{transform:translateY(0);opacity:1}
+
+/* Neon color palette for each slogan word */
+.slogan-rotator .slogan:nth-child(1){color:#7CFC00;text-shadow:0 0 8px rgba(124,252,0,0.6)} /* chartreuse */
+.slogan-rotator .slogan:nth-child(2){color:#00FFFF;text-shadow:0 0 8px rgba(0,255,255,0.6)} /* cyan */
+.slogan-rotator .slogan:nth-child(3){color:#FFFF33;text-shadow:0 0 10px rgba(255,255,51,0.7)} /* highlighter yellow */
+.slogan-rotator .slogan:nth-child(4){color:#FF69B4;text-shadow:0 0 10px rgba(255,105,180,0.7)} /* hot pink */
+.slogan-rotator .slogan:nth-child(5){color:#00FF00;text-shadow:0 0 10px rgba(0,255,0,0.6)} /* lime green */
+.slogan-rotator .slogan:nth-child(6){color:#ADFF2F;text-shadow:0 0 8px rgba(173,255,47,0.6)}
+.slogan-rotator .slogan:nth-child(7){color:#FFD700;text-shadow:0 0 8px rgba(255,215,0,0.6)}
 
 /* Cards */
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1.5rem}
@@ -191,6 +203,15 @@ body{
 .footer-inner{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem}
 .footer a{color:var(--white);opacity:0.95}
 .copyright{padding:1rem 2rem 2rem;text-align:center;opacity:0.7}
+
+/* Research sources dropdown in footer (centered above socials) */
+.sources-dropdown{position:relative}
+.sources-btn{background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--white);padding:0.5rem 0.9rem;border-radius:8px}
+.sources-btn:focus{outline:3px solid rgba(255,0,0,0.12)}
+.sources-list{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 8px);background:rgba(0,0,0,0.95);border-radius:6px;padding:0.25rem 0;list-style:none;margin:0;min-width:260px;box-shadow:0 12px 40px rgba(0,0,0,0.6);display:none;z-index:120}
+.sources-list li{padding:0.45rem 0.8rem}
+.sources-list a{color:var(--white);text-decoration:none}
+.sources-dropdown.open .sources-list{display:block}
 
 /* Reveal animation utilities */
 .reveal{opacity:0;transform:translateY(12px) skewY(-1deg);transition:opacity 560ms var(--ease),transform 560ms var(--ease)}
