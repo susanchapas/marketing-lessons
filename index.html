@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Outlaw — Brand Archetype</title>
+  <!-- Fonts: Bebas Neue (headers), Anonymous Pro (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <meta name="color-scheme" content="dark">
+</head>
+  <body class="dark">
+
+  <!-- SVG sprite: small icon set used across the UI -->
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;" focusable="false">
+    <symbol id="icon-check" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" />
+    </symbol>
+    <symbol id="icon-flame" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M13.5 2S9 5 9 9a4.5 4.5 0 009 0c0-4-3.5-7-3.5-7zM12 22a6 6 0 01-6-6c0-3.3 2-5 4-6 2 1 4 2.7 4 6a6 6 0 01-6 6z"/>
+    </symbol>
+    <symbol id="icon-twitter" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M22 5.9c-.6.3-1.2.5-1.9.6.7-.5 1.2-1.3 1.4-2.3-.7.4-1.5.6-2.4.8C18.1 4 17 3.5 15.8 3.5c-2 0-3.5 1.8-3 3.6C10 7 7.6 6 6 4.4c-.8 1.4-.1 3.3 1.2 4.1-.6 0-1.2-.2-1.6-.5v.1c0 1.8 1.2 3.3 2.9 3.6-.5.1-1 .1-1.6.1-.4 0-.8 0-1.2-.1.8 2.4 3.2 4.1 6 4.2-2.2 1.7-5 2.5-7.6 2.2C4 20.7 6.4 22 9.1 22c7.3 0 11.3-6.4 11.3-11.9v-.5c.8-.6 1.4-1.3 1.9-2.1-.7.3-1.4.5-2.2.6z"/>
+    </symbol>
+    <symbol id="icon-instagram" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm5 6.1A3 3 0 1015 11a3 3 0 00-3-2.9zM18.5 6a1 1 0 110 2 1 1 0 010-2z"/>
+    </symbol>
+  </svg>
+
+  <!-- Scroll progress indicator -->
+  <div id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- HEADER: fixed, transparent until scroll -->
+  <header id="site-header" class="header" role="banner">
+    <div class="container header-inner">
+  <a href="#hero" class="logo" aria-label="Outlaw brand archetype homepage">OUTLAW<span class="sr-only"> — Rules Were Made To Be Broken</span></a>
+      <nav role="navigation" aria-label="Primary" class="primary-nav">
+        <ul>
+          <li><a href="#definition">Definition</a></li>
+          <li><a href="#visual-identity">Visual Identity</a></li>
+          <li><a href="#voice">Voice</a></li>
+          <li><a href="#examples">Examples</a></li>
+          <li><a href="#implementation">Implementation</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO SECTION: dramatic fullscreen intro -->
+  <!-- SECTION: Hero -->
+  <main id="main" role="main">
+    <section id="hero" class="hero" aria-labelledby="hero-title">
+      <!-- HERO MEDIA: user's supplied video used as background. Place video before overlay so overlay effects still apply. -->
+      <div class="hero-media" aria-hidden="true">
+        <video class="hero-video" autoplay muted playsinline poster="" preload="auto">
+          <source src="sources/cowboy-hero-video.mp4" type="video/mp4">
+          <!-- If the user's video isn't available, the overlay and CSS gradients will still provide mood -->
+        </video>
+        <div class="hero-bg" aria-hidden="true"></div>
+      </div>
+      <div class="container hero-inner">
+  <h1 id="hero-title" class="hero-title">RULES WERE MADE TO BE BROKEN</h1>
+  <p class="hero-sub">A cinematic exploration of the "Outlaw" brand archetype — defiant, raw, and magnetic.</p>
+        <a class="btn ghost" href="#definition">Explore the Archetype</a>
+      </div>
+    </section>
+
+    <!-- SECTION: Definition and Core Traits -->
+  <section id="definition" class="section dark section--padded" aria-labelledby="definition-title">
+      <div class="container">
+        <h2 id="definition-title">Definition &amp; Core Traits</h2>
+  <p class="lede">The Outlaw challenges rules, embraces risk, and inspires others to follow. Core traits appear below — use them to craft bold, disruptive brands.</p>
+        <ul class="traits" aria-hidden="false">
+          <li class="trait" tabindex="0"><svg class="icon trait-icon" aria-hidden="true"><use href="#icon-flame"></use></svg><strong>Defiant</strong><span class="desc">Breaks expectations, rejects the status quo.</span></li>
+          <li class="trait" tabindex="0"><svg class="icon trait-icon" aria-hidden="true"><use href="#icon-check"></use></svg><strong>Unapologetic</strong><span class="desc">Speaks plainly and powerfully.</span></li>
+          <li class="trait" tabindex="0"><svg class="icon trait-icon" aria-hidden="true"><use href="#icon-flame"></use></svg><strong>Provocative</strong><span class="desc">Stirs emotion and incites action.</span></li>
+          <li class="trait" tabindex="0"><svg class="icon trait-icon" aria-hidden="true"><use href="#icon-check"></use></svg><strong>Loyal</strong><span class="desc">Attracts fiercely committed fans.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SECTION: Visual Identity Guidelines -->
+    <section id="visual-identity" class="section section--light" aria-labelledby="visual-title">
+      <div class="container">
+        <h2 id="visual-title">Visual Identity Guidelines</h2>
+  <p class="lede">Colors, type, and imagery that express the Outlaw mood.</p>
+        <div class="identity-grid">
+          <div class="swatches" aria-label="Color palette">
+              <div class="swatch" style="--swatch-bg:#000000;" tabindex="0">
+                <span class="swatch-name">Black</span>
+                <span class="swatch-hex">#000000</span>
+                <div class="tooltip">Primary background — use liberally for drama.</div>
+              </div>
+              <div class="swatch" style="--swatch-bg:#FF0000;" tabindex="0">
+                <span class="swatch-name">Red</span>
+                <span class="swatch-hex">#FF0000</span>
+                <div class="tooltip">Accent — aggressive, high-impact calls to action.</div>
+              </div>
+              <div class="swatch" style="--swatch-bg:#2E2E2E;" tabindex="0">
+                <span class="swatch-name">Charcoal</span>
+                <span class="swatch-hex">#2E2E2E</span>
+                <div class="tooltip">Secondary surfaces and panels.</div>
+              </div>
+              <div class="swatch light" style="--swatch-bg:#FFFFFF; color:#000;" tabindex="0">
+                <span class="swatch-name">White</span>
+                <span class="swatch-hex">#FFFFFF</span>
+                <div class="tooltip">Type and accents to create contrast.</div>
+              </div>
+          </div>
+
+          <div class="fonts" aria-label="Type samples">
+            <div class="font-sample">
+              <div class="font-header">Bebas Neue — Headers</div>
+              <div class="sample">Riot, REVOLT, OUTLAW</div>
+            </div>
+            <div class="font-sample monospace">
+              <div class="font-header">Anonymous Pro — Body</div>
+              <div class="sample">Raw. Monospace. Industrial. Precise.</div>
+            </div>
+          </div>
+
+          <div class="imagery" aria-label="Example imagery">
+            <div class="img alt" role="img" aria-label="Gritty graffiti texture" tabindex="0">Graffiti texture (visual)</div>
+            <div class="img alt" role="img" aria-label="Portrait with intense expression" tabindex="0">Portrait (visual)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: Brand Voice and Messaging -->
+    <!-- SECTION: Brand Voice and Messaging -->
+    <section id="voice" class="section dark" aria-labelledby="voice-title">
+      <div class="container split">
+        <div class="split-left" aria-hidden="false">
+          <h2 id="voice-title">Brand Voice &amp; Messaging</h2>
+            <div class="slogan-rotator" aria-live="polite">
+            <span class="slogan">Defy</span>
+            <span class="slogan">Revolution</span>
+            <span class="slogan">Unapologetic</span>
+            <span class="slogan">Riot</span>
+            <span class="slogan">Relentless</span>
+            <span class="slogan">No Compromise</span>
+            <span class="slogan">Disrupt</span>
+          </div>
+        </div>
+        <div class="split-right">
+          <p>Use short, punchy lines. Speak directly. Avoid corporate-speak. Tone is urgent, candid, and occasionally confrontational — never verbose.</p>
+          <p class="muted">Example: "We don't make products for everyone. We make them for the ones who won't settle."</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: Real Brand Examples -->
+    <section id="examples" class="section section--padded" aria-labelledby="examples-title">
+      <div class="container">
+        <h2 id="examples-title">Real Brand Examples</h2>
+  <p class="lede">Brands that embody the Outlaw archetype.</p>
+        <div class="cards" role="list">
+          <article class="card image-card" role="listitem" tabindex="0" style="background-image:url('sources/liquid-death-sample.jpg')" aria-label="Liquid Death visual">
+            <div class="card-overlay">
+              <h3>Liquid Death</h3>
+              <p>Subverting category norms with heavy-metal aesthetics and provocative slogans.</p>
+              <a href="https://liquiddeath.com" target="_blank" rel="noopener noreferrer">Visit source</a>
+            </div>
+          </article>
+
+          <article class="card image-card" role="listitem" tabindex="0" style="background-image:url('sources/harley-sample.jpg')" aria-label="Harley-Davidson visual">
+            <div class="card-overlay">
+              <h3>Harley-Davidson</h3>
+              <p>Selling a lifestyle — loud engines, leather, and a defiant tribe.</p>
+              <a href="https://www.harley-davidson.com" target="_blank" rel="noopener noreferrer">Visit source</a>
+            </div>
+          </article>
+
+          <article class="card image-card" role="listitem" tabindex="0" style="background-image:url('sources/diesel-sample.jpg')" aria-label="Diesel visual">
+            <div class="card-overlay">
+              <h3>Diesel</h3>
+              <p>Provocative advertising (e.g., "Be Stupid") paired with gritty, satirical visuals.</p>
+              <a href="https://www.diesel.com" target="_blank" rel="noopener noreferrer">Visit source</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: Application to Our Business Category -->
+    <section id="application" class="section parallax" aria-labelledby="application-title">
+      <div class="parallax-bg" aria-hidden="true"></div>
+      <div class="container">
+        <h2 id="application-title">Application to Our Business Category</h2>
+  <p class="large">When applied thoughtfully, the Outlaw archetype attracts fiercely loyal customers who value authenticity. Use raw visuals, frank messaging, and experiences that reward risk-takers.</p>
+      </div>
+    </section>
+
+    <!-- SECTION: Implementation Ideas -->
+    <section id="implementation" class="section section--padded" aria-labelledby="implementation-title">
+      <div class="container">
+        <h2 id="implementation-title">Implementation Ideas</h2>
+        <div class="panels">
+          <div class="panel reveal">
+            <h3>No B.S. Landing Page</h3>
+            <p>Hero image with asymmetrical layout, short CTA, and a visible statement of position.</p>
+          </div>
+          <div class="panel image reveal" role="img" aria-label="Graffiti texture">Graffiti visual</div>
+          <div class="panel reveal">
+            <h3>Membership Vault</h3>
+            <p>Invite-only experiences: badges, secret products, and inside jokes for fans.</p>
+          </div>
+          <div class="panel image reveal" role="img" aria-label="Chains and hardware texture">Chains visual</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER: compact with research sources and social icons -->
+  <footer id="site-footer" class="footer" role="contentinfo" aria-label="Footer with research sources">
+    <div class="container footer-inner">
+      <div class="sources">
+        <h4>Research Sources</h4>
+        <ul>
+          <li><a href="https://anitat.co/resources/outlaw-archetype" target="_blank" rel="noopener noreferrer">The Outlaw Archetype In Branding — The Badass Liberator</a></li>
+          <li><a href="https://www.behaviolabs.com/blog/the-bold-strategy-behind-liquid-death-advertising" target="_blank" rel="noopener noreferrer">The bold strategy behind Liquid Death advertising</a></li>
+          <li><a href="https://brandsymbol.com/the-outlaw-brand-archetype/" target="_blank" rel="noopener noreferrer">Definition and Characteristics of The Outlaw Brand Archetype</a></li>
+        </ul>
+      </div>
+      <div class="social" aria-label="Social links">
+        <a href="#" aria-label="Twitter" class="social-link" target="_blank" rel="noopener noreferrer">
+          <svg aria-hidden="true"><use href="#icon-twitter"></use></svg><span>Twitter</span>
+        </a>
+        <a href="#" aria-label="Instagram" class="social-link" target="_blank" rel="noopener noreferrer">
+          <svg aria-hidden="true"><use href="#icon-instagram"></use></svg><span>Instagram</span>
+        </a>
+      </div>
+    </div>
+  <div class="copyright">© <span id="year"></span> Outlaw Archetype Study</div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
