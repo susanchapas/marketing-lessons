@@ -162,6 +162,27 @@ body{
   .typical-imagery .cards{grid-template-columns:1fr}
 }
 
+/* Thin ticker marquee (NYSE-like) - chromatic aberration layers */
+.ticker-marquee{position:relative;width:100%;overflow:hidden;margin-top:0.6rem;margin-left:calc(-50vw + 50%);margin-right:calc(-50vw + 50%);height:3.2rem;background:rgba(255,255,255,0.03)}
+.ticker-layer{position:absolute;left:0;right:0;top:0;bottom:0;pointer-events:none;overflow:hidden}
+.ticker-track{display:flex;align-items:center;height:100%;gap:2.2rem;padding-left:2rem}
+.tick-item{display:inline-flex;align-items:center;justify-content:center;min-width:44px}
+.tick-icon{width:18px;height:18px;fill:currentColor;opacity:0.95}
+
+.ticker-layer.layer-r .ticker-track{animation:tick-scroll 12s linear infinite}
+.ticker-layer.layer-g .ticker-track{animation:tick-scroll 14s linear infinite}
+.ticker-layer.layer-b .ticker-track{animation:tick-scroll 16s linear infinite}
+
+.ticker-layer.layer-r{color:#ff4d4d;filter:drop-shadow(0 0 6px rgba(255,0,0,0.22))}
+.ticker-layer.layer-g{color:#33ff88;filter:drop-shadow(0 0 6px rgba(0,255,128,0.12))}
+.ticker-layer.layer-b{color:#66ccff;filter:drop-shadow(0 0 6px rgba(0,128,255,0.12))}
+
+@keyframes tick-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+@media (prefers-reduced-motion: reduce){
+  .ticker-layer .ticker-track{animation-play-state:paused!important;transform:none!important}
+}
+
 /* Full-bleed marquee with chromatic aberration effect */
 .marquee{position:relative;width:100%;overflow:hidden;margin-top:1rem;padding:0.75rem 0;margin-left:calc(-50vw + 50%);margin-right:calc(-50vw + 50%);}
 .marquee-layer{position:absolute;left:0;right:0;top:0;bottom:0;overflow:hidden;pointer-events:none}
