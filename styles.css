@@ -85,7 +85,7 @@ body{
 /* Traits */
 .traits{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-top:2rem;padding:0;list-style:none}
 /* Keep trait cards a fixed height so revealing the description doesn't push content around */
-.trait{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:1.25rem;border-radius:8px;transition:transform 220ms var(--ease),box-shadow 220ms;position:relative;min-height:92px}
+.trait{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:1.25rem;border-radius:8px;transition:transform 220ms var(--ease),box-shadow 220ms;position:relative;min-height:92px;border:1px solid rgba(255,0,0,0.10)}
 .trait strong{display:block;font-family:inherit;font-size:1rem;line-height:1.15;text-transform:none;font-weight:700;margin:0}
 /* Position the description absolutely under the title so revealing it doesn't change layout */
 .trait .desc{position:absolute;left:calc(22px + 0.75rem);right:1rem;top:42px;display:block;opacity:0;visibility:hidden;margin:0;font-size:0.95rem;line-height:1.25;transition:opacity 200ms var(--ease),visibility 200ms}
@@ -164,7 +164,7 @@ body{
 .slogan-rotator .slogan:nth-child(3){color:#FFFF33;text-shadow:0 0 10px rgba(255,255,51,0.7)} /* highlighter yellow */
 .slogan-rotator .slogan:nth-child(4){color:#FF69B4;text-shadow:0 0 10px rgba(255,105,180,0.7)} /* hot pink */
 .slogan-rotator .slogan:nth-child(5){color:#00FF00;text-shadow:0 0 10px rgba(0,255,0,0.6)} /* lime green */
-.slogan-rotator .slogan:nth-child(6){color:#ADFF2F;text-shadow:0 0 8px rgba(173,255,47,0.6)}
+.slogan-rotator .slogan:nth-child(6){color:#9B30FF;text-shadow:0 0 10px rgba(155,48,255,0.7)} /* neon purple */
 .slogan-rotator .slogan:nth-child(7){color:#FFD700;text-shadow:0 0 8px rgba(255,215,0,0.6)}
 
 /* Cards */
@@ -176,7 +176,7 @@ body{
 
 /* Image-card variant: background image with overlay that reveals on hover/focus */
 .image-card{background-size:cover;background-position:center;position:relative;padding:0;min-height:220px;overflow:hidden;border-radius:8px}
-.image-card .card-overlay{position:absolute;left:0;right:0;top:0;bottom:0;background:rgba(0,0,0,0.88);color:var(--white);padding:1rem;transform:translateY(100%);transition:transform .34s cubic-bezier(.2,.9,.2,1),opacity .2s}
+.image-card .card-overlay{position:absolute;left:0;right:0;top:0;bottom:0;background:rgba(180,0,0,0.92);color:var(--white);padding:1rem;transform:translateY(100%);transition:transform .34s cubic-bezier(.2,.9,.2,1),opacity .2s}
 .image-card:hover .card-overlay,.image-card:focus-within .card-overlay,.image-card:focus .card-overlay{transform:translateY(0%);opacity:1}
 .image-card a{color:var(--white);font-weight:700;text-decoration:underline}
 .image-card:focus{outline:3px solid rgba(255,0,0,0.14);outline-offset:3px}
@@ -242,9 +242,9 @@ body{
 .sources-list{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 8px);background:rgba(0,0,0,0.95);border-radius:6px;padding:0.25rem 0;list-style:none;margin:0;min-width:260px;box-shadow:0 12px 40px rgba(0,0,0,0.6);display:none;z-index:120}
 .sources-list li{padding:0;border-top:1px solid rgba(255,255,255,0.03)}
 .sources-list li:first-child{border-top:0}
-.sources-list a{color:var(--white);text-decoration:none;display:block;padding:0.6rem 0.9rem;border-radius:6px;margin:0.25rem 0;background:rgba(255,255,255,0.02);transition:background .18s,transform .12s}
+.sources-list a{color:var(--white);text-decoration:none;display:block;padding:0.6rem 0.9rem;border-radius:6px;margin:0.25rem 0;background:rgba(255,255,255,0.02);transition:background .18s,transform .12s,color .12s}
 .sources-list a:focus{outline:3px solid rgba(255,0,0,0.12);transform:translateY(-1px)}
-.sources-list a:hover{background:rgba(255,255,255,0.04);transform:translateY(-1px)}
+.sources-list a:hover{background:rgba(255,255,255,0.04);transform:translateY(-1px);color:var(--red)}
 .sources-dropdown.open .sources-list{display:block}
 
 /* Mobile: make dropdown behave like a stacked accordion under the button */
