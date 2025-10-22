@@ -5,6 +5,7 @@
   --white:#FFFFFF;
   --char:#2E2E2E;
   --max-width:1200px;
+  --header-offset:72px; /* height of fixed header to offset scroll snapping */
   --ease: cubic-bezier(.2,.9,.3,1);
 }
 
@@ -81,6 +82,16 @@ body{
 .dark{background:var(--bg);color:var(--white)}
 .section--light{background:linear-gradient(180deg,rgba(46,46,46,0.8),rgba(0,0,0,0.9));}
 .lede{max-width:70ch;opacity:0.9}
+
+/* Scroll snapping: auto-anchor to next section when user scrolls */
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: var(--header-offset);
+}
+main > section {
+  scroll-snap-align: start;
+}
 
 /* Section headers: use Bebas Neue for bold, condensed headlines across sections
    except where explicitly overridden (see #application-title) */
