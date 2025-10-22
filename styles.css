@@ -100,6 +100,12 @@ body{
   letter-spacing: normal;
 }
 
+/* Make the application section title smaller and more in-scale with body copy */
+#application-title{
+  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  line-height:1.15;
+}
+
 /* Traits */
 .traits{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-top:2rem;padding:0;list-style:none}
 /* Keep trait cards a fixed height so revealing the description doesn't push content around */
