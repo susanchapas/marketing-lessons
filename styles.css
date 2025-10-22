@@ -162,6 +162,31 @@ body{
   .typical-imagery .cards{grid-template-columns:1fr}
 }
 
+/* Full-bleed marquee with chromatic aberration effect */
+.marquee{position:relative;width:100%;overflow:hidden;margin-top:1rem;padding:0.75rem 0;margin-left:calc(-50vw + 50%);margin-right:calc(-50vw + 50%);}
+.marquee-layer{position:absolute;left:0;right:0;top:0;bottom:0;overflow:hidden;pointer-events:none}
+.marquee-track{display:flex;gap:2rem;align-items:center;height:56px;padding-left:2rem}
+.marq-item{display:flex;align-items:center;justify-content:center;min-width:56px}
+.marq-item .icon{width:36px;height:36px;fill:currentColor;color:var(--white);opacity:0.95}
+
+/* animate tracks at slightly different speeds & offsets */
+.marquee-layer.layer-r .marquee-track{animation:marq-scroll 18s linear infinite}
+.marquee-layer.layer-g .marquee-track{animation:marq-scroll 20s linear infinite}
+.marquee-layer.layer-b .marquee-track{animation:marq-scroll 22s linear infinite}
+
+.marquee-layer.layer-r .marq-item .icon{color:#ff4d4d;filter:drop-shadow(0 0 8px rgba(255,0,0,0.28))}
+.marquee-layer.layer-g .marq-item .icon{color:#33ff88;filter:drop-shadow(0 0 8px rgba(0,255,128,0.16))}
+.marquee-layer.layer-b .marq-item .icon{color:#66ccff;filter:drop-shadow(0 0 8px rgba(0,128,255,0.16))}
+
+@keyframes marq-scroll{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .marquee-layer .marquee-track{animation-play-state:paused!important;transform:none!important}
+}
+
 /* Split voice */
 .split{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
 .slogan-rotator{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;display:block;position:relative;height:3rem;overflow:hidden}
