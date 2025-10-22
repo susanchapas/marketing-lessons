@@ -196,73 +196,7 @@
     sec.setAttribute('tabindex','-1');
   });
 
-  // Immediate snap on wheel/keyboard: harsher snapping to next/previous section/footer
-  (function immediateSnap(){
-    if(prefersReduced) return; // respect reduced motion
-
-    const headerOffset = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-offset')) || 72;
-    // targets include all main sections and the footer so footer is reachable
-    function getTargets(){
-      const secs = Array.from(document.querySelectorAll('main > section'));
-      const foot = document.querySelector('footer');
-      return foot ? secs.concat([foot]) : secs;
-    }
-
-    let isLocked = false;
-    const lockMs = 420; // short lock while jump completes
-
-    function scrollToTarget(el){
-      if(!el) return;
-      isLocked = true;
-      const top = el.getBoundingClientRect().top + window.scrollY - headerOffset;
-      window.scrollTo({top: Math.max(0, Math.round(top)), left:0, behavior: 'auto'});
-      setTimeout(()=> isLocked = false, lockMs);
-    }
-
-    function findNext(deltaY){
-      const targets = getTargets();
-      const positions = targets.map(t=> Math.round(t.getBoundingClientRect().top + window.scrollY - headerOffset));
-      const currentY = window.scrollY;
-      if(deltaY > 0){
-        // next target whose position is greater than currentY + 10
-        for(let i=0;i<positions.length;i++){
-          if(positions[i] > currentY + 10) return targets[i];
-        }
-        return targets[targets.length-1];
-      } else {
-        // previous target whose position is less than currentY - 10, find last
-        for(let i=positions.length-1;i>=0;i--){
-          if(positions[i] < currentY - 10) return targets[i];
-        }
-        return targets[0];
-      }
-    }
-
-    function onWheel(e){
-      // only vertical scroll and enough delta to avoid subtle touchpad swipes
-      if(isLocked) return;
-      if(Math.abs(e.deltaY) < 30) return; // threshold
-      // prevent default to avoid browser inertial scroll before jump
-      e.preventDefault();
-      const next = findNext(e.deltaY);
-      if(next) scrollToTarget(next);
-    }
-
-    function onKey(e){
-      if(isLocked) return;
-      // handle page navigation keys for immediate snaps
-      const pageDown = e.key === 'PageDown' || e.key === 'ArrowDown';
-      const pageUp = e.key === 'PageUp' || e.key === 'ArrowUp';
-      if(!pageDown && !pageUp) return;
-      e.preventDefault();
-      const next = findNext(pageDown ? 120 : -120);
-      if(next) scrollToTarget(next);
-    }
-
-    // use non-passive so we can preventDefault on wheel
-    window.addEventListener('wheel', onWheel, {passive:false});
-    window.addEventListener('keydown', onKey, {passive:false});
-  })();
+  // immediate snap behavior removed per user request
 
   // Simple A/B toggle for implementation variants
   (function implVariants(){
