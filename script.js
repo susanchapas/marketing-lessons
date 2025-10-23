@@ -88,23 +88,68 @@
     });
   }
 
-  // Reveal on scroll using IntersectionObserver
-  const reveals = document.querySelectorAll('.reveal');
+  // Enhanced reveal on scroll with stagger and child reveals
+  const reveals = Array.from(document.querySelectorAll('.reveal'));
   if(!prefersReduced && 'IntersectionObserver' in window){
     const obs = new IntersectionObserver((entries,inst)=>{
       entries.forEach(entry=>{
         if(entry.isIntersecting){
-          entry.target.classList.add('visible');
+          const el = entry.target;
+          // compute a small stagger based on DOM order to create a pleasing cascade
+          try{
+            const idx = reveals.indexOf(el);
+            const baseDelay = Math.min(200, idx * 60); // cap delay for very long pages
+            el.style.setProperty('--reveal-delay', baseDelay + 'ms');
+            // stagger inner children if present
+            const children = Array.from(el.querySelectorAll('[data-reveal]'));
+            children.forEach((c,i)=> c.style.setProperty('--reveal-delay', (baseDelay + i*60) + 'ms'));
+          }catch(e){}
+
+          el.classList.add('visible');
           // if it's a card, add pop-in
-          if(entry.target.classList.contains('card')) entry.target.classList.add('pop-in');
-          inst.unobserve(entry.target);
+          if(el.classList.contains('card')) el.classList.add('pop-in');
+          inst.unobserve(el);
         }
       })
-    },{rootMargin:'0px 0px -10% 0px',threshold:0.08});
-    reveals.forEach(r=>obs.observe(r));
+    },{rootMargin:'0px 0px -12% 0px',threshold:0.06});
+    reveals.forEach((r)=> obs.observe(r));
   } else {
-    // fallback: show all
+    // fallback: show all immediately
     reveals.forEach(r=>{ r.classList.add('visible'); if(r.classList.contains('card')) r.classList.add('pop-in'); });
+  }
+
+  // Lightweight parallax: move elements with data-parallax attribute using RAF
+  if(!prefersReduced){
+    const parallaxEls = Array.from(document.querySelectorAll('[data-parallax]'));
+    if(parallaxEls.length){
+      let lastY = window.scrollY;
+      let ticking = false;
+
+      function onScroll(){
+        lastY = window.scrollY;
+        if(!ticking){ window.requestAnimationFrame(updateParallax); ticking = true; }
+      }
+
+      function updateParallax(){
+        const scrolled = lastY;
+        const vh = window.innerHeight;
+        parallaxEls.forEach(el=>{
+          const speed = parseFloat(el.dataset.parallax) || 0.12; // sensible default
+          const rect = el.getBoundingClientRect();
+          // compute offset from center of viewport
+          const offset = (rect.top + rect.height/2) - (vh/2);
+          // translate by offset * speed (negative to move opposite scroll for depth)
+          const translateY = Math.round(-offset * speed);
+          el.style.transform = `translate3d(0, ${translateY}px, 0)`;
+        });
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', onScroll, {passive:true});
+      window.addEventListener('resize', ()=>{ /* recompute on resize */ if(parallaxEls.length) updateParallax(); }, {passive:true});
+      // kickstart once
+      updateParallax();
+    }
   }
 
   // Scroll progress

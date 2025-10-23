@@ -427,8 +427,31 @@ body{
 }
 
 /* Reveal animation utilities */
-.reveal{opacity:0;transform:translateY(12px) skewY(-1deg);transition:opacity 560ms var(--ease),transform 560ms var(--ease)}
+.reveal{
+  opacity:0;
+  transform:translateY(18px) scale(.998);
+  transition:opacity 560ms var(--ease),transform 560ms var(--ease);
+  will-change:opacity,transform;
+  /* allow JS to set a per-element delay via --reveal-delay */
+  transition-delay: var(--reveal-delay, 0ms);
+}
 .reveal.visible{opacity:1;transform:none}
+
+/* Child-level staggerable reveal: use data-reveal on children */
+.reveal [data-reveal]{
+  opacity:0;
+  transform:translateY(8px) scale(.998);
+  transition:opacity 480ms var(--ease),transform 480ms var(--ease);
+  will-change:opacity,transform;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.visible [data-reveal]{
+  opacity:1;
+  transform:none;
+}
+
+/* Parallax helper class — elements flagged with data-parallax will be moved via JS */
+.parallax{will-change:transform}
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce){
