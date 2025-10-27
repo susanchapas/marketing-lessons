@@ -11,6 +11,9 @@
   --ease: cubic-bezier(.2,.9,.3,1);
 }
 
+/* utility: inline emphasis in brand red */
+.em-red{ color: var(--red); font-weight:700; }
+
 /* Global neutralization of <strong> — visual emphasis removed site-wide */
 strong{
   font-weight: inherit;
@@ -513,23 +516,6 @@ h4 { font-size: clamp(1rem, 1.6vw, 1.25rem); line-height: 1.1; }
 /* make callouts responsive */
 @media (max-width:800px){
   .impl-grid{grid-template-columns:1fr}
-}
-
-/* Make inline SVGs inside implementation panels scale & lift on hover/focus.
-   Targets both SVGs with and without the .impl-icon class so inline
-   SVGs (88x88) in the markup receive the same interactive affordance. */
-.panel.image svg{
-  display:block;
-  margin:0 auto;
-  width:auto; /* respect inline sizing but allow transform scaling */
-  height:auto;
-  transition: transform 260ms var(--ease), filter 220ms var(--ease), opacity 180ms;
-  transform-origin: center center;
-}
-.panel.image:hover svg,
-.panel.image:focus-within svg{
-  transform: translateY(-8px) scale(1.12);
-  filter: drop-shadow(0 12px 28px rgba(0,0,0,0.65));
 }
 
 /* Ensure any <strong> inside the implementation section is visually neutral */
