@@ -304,7 +304,7 @@ h4 { font-size: clamp(1rem, 1.6vw, 1.25rem); line-height: 1.1; }
 
 /* Typical imagery placed under the color palette (left column) and responsive */
 .typical-imagery{grid-column:1 / -1;text-align:left}
-.typical-imagery .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0.75rem;margin-top:0.6rem}
+.typical-imagery .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;margin-top:0.9rem}
 .typical-imagery .card{padding:0.9rem}
 
 @media (max-width:800px){
@@ -383,7 +383,10 @@ h4 { font-size: clamp(1rem, 1.6vw, 1.25rem); line-height: 1.1; }
 .slogan-rotator .slogan{color:var(--red);text-shadow:0 0 8px rgba(255,0,0,0.45);}
 
 /* Cards */
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1.5rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;margin-top:1.75rem}
+
+/* Examples-specific spacing: slightly more breathing room for the examples section */
+#examples .cards{gap:1.75rem}
 .card{
   /* stronger, slightly lighter surface so cards pop against the black page bg */
   background: linear-gradient(180deg, rgba(46,46,46,0.98), rgba(28,28,28,0.95));
