@@ -268,9 +268,12 @@ h4 { font-size: clamp(1rem, 1.6vw, 1.25rem); line-height: 1.1; }
 
 /* Make the copy button visible on the white swatch: grey background with charcoal text */
 #visual-identity .swatch.light .copy-hex{
-  background:#e6e6e6;
-  color:#2E2E2E; /* charcoal text for visibility */
-  border:1px solid rgba(0,0,0,0.12);
+  /* On the white swatch use a transparent button (no grey fill) so the
+     copy control doesn't visually compete with the swatch surface. Keep a
+     subtle border and charcoal text for contrast. */
+  background: transparent;
+  color: #2E2E2E; /* charcoal text for visibility */
+  border: 1px solid rgba(0,0,0,0.12);
 }
 #visual-identity .swatch.light .copy-hex:focus{
   outline:3px solid rgba(0,0,0,0.14);
@@ -299,24 +302,23 @@ h4 { font-size: clamp(1rem, 1.6vw, 1.25rem); line-height: 1.1; }
   transform: translateY(-1px) scale(1.02);
   box-shadow: 0 8px 20px rgba(255,0,0,0.12);
 }
-.copy-hex.copied::after{
-  content: 'Copied';
-  position: absolute;
-  top: -34px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0,0,0,0.9);
-  color: #fff;
-  font-size: 0.75rem;
-  padding: 0.28rem 0.5rem;
-  border-radius: 6px;
-  white-space:nowrap;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 160ms ease, transform 160ms ease;
+/* Visual confirmation now uses button text change (handled by JS) instead of a pseudo-tooltip. */
+
+/* Ensure the white swatch (high-specificity rule) still shows the red 'copied' and 'error'
+   visual states — the white swatch rule is intentionally specific, so provide an
+   equally specific override for the .copied and .copy-error states. */
+#visual-identity .swatch.light .copy-hex.copied{
+  background: var(--red) !important;
+  border-color: rgba(255,0,0,0.9) !important;
+  color: #fff !important;
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(255,0,0,0.12);
 }
-.copy-hex.copied::after{opacity:1}
+
+#visual-identity .swatch.light .copy-hex.copy-error{
+  outline:2px solid rgba(255,0,0,0.22) !important;
+  transform: translateX(-2px) !important;
+}
 
 /* error state (rare): subtle shake and red outline */
 .copy-hex.copy-error{outline:2px solid rgba(255,0,0,0.22);transform:translateX(-2px);}
