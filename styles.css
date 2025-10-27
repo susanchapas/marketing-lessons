@@ -422,7 +422,14 @@ h4 { font-size: clamp(1rem, 1.6vw, 1.25rem); line-height: 1.1; }
 /* Implementation content styles */
 .implementation-content{background:linear-gradient(180deg,rgba(0,0,0,0.35),rgba(255,255,255,0.02));padding:1.25rem;margin-top:1rem;border-radius:8px}
 .impl-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:start}
-.impl-col h4{font-family:inherit;margin:0 0 .5rem 0;font-weight:700;text-transform:none}
+.impl-col h4{
+  /* Use the condensed display face for implementation section headings */
+  font-family: 'Bebas Neue', sans-serif;
+  margin:0 0 .5rem 0;
+  font-weight:700;
+  text-transform:none;
+  letter-spacing: var(--heading-letter-spacing);
+}
 
 /* Hero-style callouts */
 .impl-callouts{display:flex;flex-direction:column;gap:0.9rem}
@@ -432,6 +439,12 @@ h4 { font-size: clamp(1rem, 1.6vw, 1.25rem); line-height: 1.1; }
 .impl-callout .variant[data-variant="A"]{font-family:inherit;font-size:1.15rem;font-weight:700;text-transform:none}
 .impl-callout.active .variant[data-variant="A"],
 .impl-callout.active .variant[data-variant="B"]{display:block}
+
+/* A/B implementation: use the lighter font-weight for all content inside the
+   implementation area so Variant A and B read with the same (lighter) weight. */
+.implementation-content, .implementation-content * {
+  font-weight: 400 !important;
+}
 
 /* Variant controls */
 .impl-variant-controls{display:flex;gap:0.5rem;align-items:center;margin-bottom:0.75rem}
