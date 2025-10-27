@@ -516,9 +516,10 @@ h4 { font-size: clamp(1rem, 1.6vw, 1.25rem); line-height: 1.1; }
 .card.pop-in:focus,
 .reveal.visible.card:hover,
 .reveal.visible.card:focus {
-  transform: translateY(-12px) scale(1.03);
-  box-shadow: 0 22px 56px rgba(0,0,0,0.7);
-  transition: transform 220ms var(--ease), box-shadow 220ms var(--ease);
+  /* more dramatic pop: higher lift, slightly larger scale, deeper shadow */
+  transform: translateY(-20px) scale(1.06);
+  box-shadow: 0 34px 88px rgba(0,0,0,0.8);
+  transition: transform 260ms cubic-bezier(.16,.85,.24,1), box-shadow 260ms cubic-bezier(.16,.85,.24,1);
 }
 
 /* Make implementation callouts slide & pop with stronger X motion */
