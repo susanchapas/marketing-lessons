@@ -103,6 +103,16 @@
             // stagger inner children if present
             const children = Array.from(el.querySelectorAll('[data-reveal]'));
             children.forEach((c,i)=> c.style.setProperty('--reveal-delay', (baseDelay + i*60) + 'ms'));
+            // If the revealed element contains image/cards that may not have been observed
+            // (for example .card elements inside a .section), ensure they get the pop-in
+            // effect with a slight internal stagger. This helps imagery cards inside
+            // sections animate even when the section itself is observed first.
+            const innerCards = Array.from(el.querySelectorAll('.card'));
+            innerCards.forEach((card, ci)=>{
+              // schedule a staggered addition of pop-in so it feels natural
+              const d = baseDelay + 80 + (ci * 80);
+              setTimeout(()=>{ card.classList.add('pop-in'); }, d);
+            });
           }catch(e){}
 
           el.classList.add('visible');
