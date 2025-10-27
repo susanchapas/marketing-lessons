@@ -562,30 +562,6 @@ h4 { font-size: clamp(1rem, 1.6vw, 1.25rem); line-height: 1.1; }
   .logo{font-size:1.2rem}
 }
 
-/* Mobile-specific safety: hide heavy background video on small screens to
-   avoid layout and performance regressions and ensure responsive stacking. */
-@media (max-width:600px){
-  .hero-inner{padding:2rem 0.8rem}
-  .hero-title{font-size:clamp(1.4rem,10vw,2.4rem)}
-  /* Remove video visuals on small devices (use hero-bg as fallback/poster). */
-  .hero-media .hero-video{display:none !important;visibility:hidden !important}
-  .hero-bg{opacity:1}
-  /* Ensure header controls are above all hero content on small screens */
-  .nav-toggle{z-index:220}
-}
-
-/* Additional mobile hero fixes: allow hero to expand vertically and avoid clipping
-   when text wraps to multiple lines. Only applied on small screens where videos
-   are hidden and layering is simplified. */
-@media (max-width:600px){
-  .hero{min-height:auto;overflow:visible;padding-top:3.2rem}
-  .hero-inner{align-items:flex-start;text-align:center}
-  .hero-title{line-height:1.05;word-break:break-word;margin-bottom:0.5rem}
-  .hero-sub{font-size:0.95rem}
-  /* Make sure the hero-inner can stack naturally and not be constrained */
-  .hero-inner{display:block}
-}
-
 /* Ensure trait text can wrap cleanly on narrow viewports */
 @media (max-width:420px){
   .trait strong{font-size:0.98rem}
