@@ -499,11 +499,27 @@
           }
           // announce for screen readers
           announce(`${hex} copied to clipboard`);
-          // visual confirmation: add .copied class briefly
-          try{ btn.classList.add('copied'); setTimeout(()=> btn.classList.remove('copied'), 1400); }catch(e){}
+          // visual confirmation: change button text to 'Copied' briefly and keep .copied class
+          try{
+            const originalText = btn.textContent;
+            btn.classList.add('copied');
+            btn.textContent = 'Copied';
+            setTimeout(()=>{
+              try{ btn.textContent = originalText; }catch(e){}
+              try{ btn.classList.remove('copied'); }catch(e){}
+            }, 1400);
+          }catch(e){}
         }catch(err){
           announce('Unable to copy color');
-          try{ btn.classList.add('copy-error'); setTimeout(()=> btn.classList.remove('copy-error'), 1400); }catch(e){}
+          try{
+            const originalText = btn.textContent;
+            btn.classList.add('copy-error');
+            btn.textContent = 'Error';
+            setTimeout(()=>{
+              try{ btn.textContent = originalText; }catch(e){}
+              try{ btn.classList.remove('copy-error'); }catch(e){}
+            }, 1400);
+          }catch(e){}
         }
       });
       // keyboard activation for accessibility
