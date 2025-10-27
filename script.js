@@ -58,35 +58,120 @@
     document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') close(); });
   })();
 
-  // Ensure hero video plays; if autoplay is blocked, try to play after first user interaction
-  const heroVideo = document.querySelector('.hero-video');
-  function tryPlayVideo(){
-    if(!heroVideo) return;
-    const p = heroVideo.play();
+  // Hero video: support a dual-video crossfade loop when two video elements are present.
+  // Fallback: if only one video exists, set it to loop.
+  const heroVideos = Array.from(document.querySelectorAll('.hero-video'));
+  const primaryHero = heroVideos[0] || null;
+
+  function tryPlayVideo(el){
+    if(!el) return;
+    const p = el.play();
     if(p && p.then) p.catch(()=>{
-      const onFirst = ()=>{ heroVideo.play().catch(()=>{}); window.removeEventListener('click', onFirst); window.removeEventListener('keydown', onFirst); };
+      const onFirst = ()=>{ el.play().catch(()=>{}); window.removeEventListener('click', onFirst); window.removeEventListener('keydown', onFirst); };
       window.addEventListener('click', onFirst, {once:true});
       window.addEventListener('keydown', onFirst, {once:true});
     });
   }
-  tryPlayVideo();
+    try{
+      // If there are two stacked videos we can crossfade between them on loop.
+      if(heroVideos.length >= 2 && !prefersReduced){
+        const a = heroVideos[0];
+        const b = heroVideos[1];
+        // ensure second has the same source as the first (it may be empty in markup)
+        try{
+          const srcEl = a.querySelector('source');
+          if(srcEl && srcEl.getAttribute('src') && (!b.querySelector('source') && !b.src)){
+            // set the raw src on the video element for simplicity and force a load
+            b.src = srcEl.getAttribute('src');
+            try{ b.load(); }catch(e){}
+          }
+        }catch(e){}
 
-  // Fade-in on play, fade-out on end
-  if(heroVideo){
-    heroVideo.addEventListener('playing', ()=>{
-      heroVideo.classList.add('play-visible');
-      heroVideo.classList.remove('play-hidden');
-    });
+        // initial visibility classes
+        a.classList.add('play-visible');
+        b.classList.add('play-hidden');
 
-    heroVideo.addEventListener('ended', ()=>{
-      // ensure video stays on last frame by pausing
-      heroVideo.pause();
-      videoCompleted = true;
-      // Do NOT fade out on end — keep the final frame visible.
-      heroVideo.classList.add('play-visible');
-      heroVideo.classList.remove('play-hidden');
-    });
-  }
+        // crossfade params
+  const crossfadeMs = 2000; // crossfade duration in ms (visual dissolve) — increased for a smoother dissolve
+  // lead time before the end of the clip to begin preparing the incoming video
+  // and start the dissolve. Make this larger than the visual crossfade so
+  // playback and buffering begin early enough to avoid hard cuts.
+  // With a longer fade we also want a longer lead so the incoming video has
+  // more time to buffer and start playing before the visual swap.
+  const crossfadeLeadSec = Math.max((crossfadeMs / 1000) * 2.0, 2.0); // seconds
+        let isCrossfading = false;
+
+        // attempt to play primary video; second will be started right before crossfade
+        tryPlayVideo(a);
+
+        // helper to begin crossfade from `from` video to `to` video
+        function beginCrossfade(from, to){
+          if(isCrossfading) return;
+          isCrossfading = true;
+
+          // wait for 'canplaythrough' on `to` before doing the visual swap to avoid black frames
+          const onCan = function(){
+            try{ to.removeEventListener('canplaythrough', onCan); }catch(e){}
+            try{
+              to.currentTime = 0;
+              to.muted = true;
+              const p = to.play(); if(p && p.catch) p.catch(()=>{});
+            }catch(e){}
+
+            // apply classes to crossfade
+            to.classList.add('play-visible'); to.classList.remove('play-hidden');
+            from.classList.remove('play-visible'); from.classList.add('play-hidden');
+
+            // after crossfade period, pause the outgoing video
+            setTimeout(()=>{
+              try{ from.pause(); from.currentTime = 0; }catch(e){}
+              isCrossfading = false;
+            }, crossfadeMs + 80);
+          };
+
+          // If `to` is already ready, run immediately, else wait
+          if(to.readyState >= 3){ // HAVE_FUTURE_DATA / canplaythrough-like
+            onCan();
+          } else {
+            to.addEventListener('canplaythrough', onCan, {once:true});
+            // also try loading if needed
+            try{ to.load(); }catch(e){}
+          }
+        }
+
+        // watch each video's timeupdate to trigger crossfade when it nears the end
+        heroVideos.forEach((v, idx)=>{
+          v.addEventListener('timeupdate', ()=>{
+            try{
+              const dur = v.duration;
+              if(!dur || isNaN(dur)) return;
+              const left = dur - v.currentTime;
+           // start the crossfade earlier (lead time) to avoid jarring cuts
+           if(left <= crossfadeLeadSec && !isCrossfading){
+                const other = heroVideos[(idx+1) % heroVideos.length];
+                beginCrossfade(v, other);
+              }
+            }catch(e){}
+          });
+          // ensure we try to play when metadata is ready (some browsers need this)
+          v.addEventListener('loadedmetadata', ()=> tryPlayVideo(v));
+          v.addEventListener('playing', ()=>{ v.classList.add('play-visible'); v.classList.remove('play-hidden'); });
+        });
+      } else if(primaryHero){
+        // Single-video fallback: loop and keep the smooth behavior from before
+        try{ primaryHero.loop = true; }catch(e){}
+        tryPlayVideo(primaryHero);
+        primaryHero.addEventListener('playing', ()=>{
+          primaryHero.classList.add('play-visible');
+          primaryHero.classList.remove('play-hidden');
+        });
+      }
+    }catch(err){
+      // Fail silently but keep other app JS running. Log in dev console.
+      if(window && window.console && window.console.error) console.error('Hero video crossfade error:', err);
+    }
+
+
 
   // Enhanced reveal on scroll with stagger and child reveals
   const reveals = Array.from(document.querySelectorAll('.reveal'));
@@ -198,23 +283,26 @@
 
   // Video end handling: freeze on final frame and allow replay when scrolling back up
   let videoCompleted = false;
-  if(heroVideo){
+  // Use `primaryHero` (first hero video) for single-video end handling. Using an
+  // undeclared variable here caused a ReferenceError which could stop the rest
+  // of the script from executing (breaking other UI such as the A/B controls).
+  if(primaryHero){
     // Require the user to have scrolled at least one viewport height before allowing replay.
     let hasScrolledOneViewport = false;
 
     window.addEventListener('scroll', ()=>{
-      if(!heroVideo) return;
+      if(!primaryHero) return;
       // mark that user has scrolled down far enough at least once
       if(window.scrollY >= window.innerHeight) hasScrolledOneViewport = true;
 
       // when the user scrolls back up to near top, if the video finished and user previously scrolled down, replay
       if(window.scrollY < 120 && videoCompleted && hasScrolledOneViewport){
         try{
-          heroVideo.currentTime = 0;
+          primaryHero.currentTime = 0;
           // fade in before play
-          heroVideo.classList.add('play-visible');
-          heroVideo.classList.remove('play-hidden');
-          heroVideo.play();
+          primaryHero.classList.add('play-visible');
+          primaryHero.classList.remove('play-hidden');
+          primaryHero.play();
         }catch(e){}
         videoCompleted = false;
         // reset the gate until they scroll down again

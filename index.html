@@ -72,10 +72,12 @@
   <section id="hero" class="hero reveal" aria-labelledby="hero-title">
       <!-- HERO MEDIA: user's supplied video used as background. Place video before overlay so overlay effects still apply. -->
       <div class="hero-media" aria-hidden="true">
-        <video class="hero-video" autoplay muted playsinline poster="" preload="auto">
+        <!-- Two stacked videos to allow a crossfade loop effect. If JS is unavailable
+             one video will play and loop as a fallback. -->
+        <video class="hero-video hero-video--a" autoplay muted playsinline preload="auto">
           <source src="sources/cowboy-hero-video.mp4" type="video/mp4">
-          <!-- If the user's video isn't available, the overlay and CSS gradients will still provide mood -->
         </video>
+        <video class="hero-video hero-video--b" autoplay muted playsinline preload="auto" aria-hidden="true"></video>
         <div class="hero-bg" aria-hidden="true"></div>
       </div>
       <div class="container hero-inner">
