@@ -133,7 +133,20 @@ h4 { font-size: clamp(1rem, 1.6vw, 1.25rem); line-height: 1.1; }
 .traits{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-top:2rem;padding:0;list-style:none}
 /* Trait cards: always show the description (no hover needed). Use a two-column grid so icon and content align.
   Keep a small vertical gap between the title and the description for legibility. */
-.trait{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:1.25rem;border-radius:8px;transition:transform 220ms var(--ease),box-shadow 220ms;min-height:92px;border:1px solid rgba(255,0,0,0.10);display:grid;grid-template-columns:28px 1fr;gap:0.75rem;align-items:start}
+.trait{
+  /* higher-contrast trait cards so they separate from the background */
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
+  padding:1.25rem;
+  border-radius:8px;
+  transition:transform 220ms var(--ease),box-shadow 220ms, background 220ms;
+  min-height:92px;
+  border:1px solid rgba(255,0,0,0.18);
+  display:grid;
+  grid-template-columns:28px 1fr;
+  gap:0.75rem;
+  align-items:start;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+}
 .trait svg{grid-column:1;grid-row:1 / span 2;align-self:start}
 .trait strong{display:block;font-family:inherit;font-size:1rem;line-height:1.15;text-transform:none;font-weight:700;margin:0;grid-column:2;grid-row:1}
 /* Make description part of the normal flow and force it under the title */
@@ -371,7 +384,16 @@ h4 { font-size: clamp(1rem, 1.6vw, 1.25rem); line-height: 1.1; }
 
 /* Cards */
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1.5rem}
-.card{background:var(--char);padding:1rem;border-radius:8px;transition:transform 260ms var(--ease),box-shadow 260ms,opacity 200ms;transform-origin:center bottom}
+.card{
+  /* stronger, slightly lighter surface so cards pop against the black page bg */
+  background: linear-gradient(180deg, rgba(46,46,46,0.98), rgba(28,28,28,0.95));
+  padding:1rem;
+  border-radius:8px;
+  transition:transform 260ms var(--ease),box-shadow 260ms,opacity 200ms,background 260ms;
+  transform-origin:center bottom;
+  border:1px solid rgba(255,0,0,0.12);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.7), 0 2px 0 rgba(255,255,255,0.02) inset;
+}
 .card.pop-in{transform:translateY(-8px) scale(1.02);box-shadow:0 18px 40px rgba(0,0,0,0.6);opacity:1}
 .card:focus,.card:hover{transform:translateY(-12px) scale(1.02);box-shadow:0 20px 50px rgba(0,0,0,0.7);outline:3px solid rgba(255,0,0,0.08)}
 .card img{width:100%;height:80px;background:rgba(255,255,255,0.03);object-fit:contain;border-radius:4px}
@@ -532,6 +554,13 @@ h4 { font-size: clamp(1rem, 1.6vw, 1.25rem); line-height: 1.1; }
   box-shadow: 0 34px 88px rgba(0,0,0,0.8);
   transition: transform 260ms cubic-bezier(.16,.85,.24,1), box-shadow 260ms cubic-bezier(.16,.85,.24,1);
 }
+
+/* stronger border highlight when popped-in/hovered so cards separate from the page */
+.card.pop-in{border-color:rgba(255,0,0,0.14)}
+.card.pop-in:hover,
+.card.pop-in:focus,
+.reveal.visible.card:hover,
+.reveal.visible.card:focus { border:1px solid rgba(255,0,0,0.22); }
 
 /* Make implementation callouts slide & pop with stronger X motion */
 .implementation-content .impl-callout{opacity:0;transform:translateX(-26px) translateY(8px) scale(.996);transition:opacity 520ms cubic-bezier(.16,.85,.24,1),transform 520ms cubic-bezier(.16,.85,.24,1)}
