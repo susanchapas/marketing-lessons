@@ -320,6 +320,21 @@ h4 { font-size: clamp(1rem, 1.6vw, 1.25rem); line-height: 1.1; }
   transform: translateX(-2px) !important;
 }
 
+/* If a swatch is the brand red (inline style contains the hex), the
+   existing .copied visuals (red on red) lack contrast. Use a black
+   background for the copied / error states so the label is legible. */
+.swatch[style*="#FF0000"] .copy-hex.copied{
+  background: #000 !important;
+  border-color: rgba(0,0,0,0.85) !important;
+  color: #fff !important;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5) !important;
+}
+.swatch[style*="#FF0000"] .copy-hex.copy-error{
+  background: #000 !important;
+  color: #fff !important;
+  outline:2px solid rgba(255,0,0,0.22) !important;
+}
+
 /* error state (rare): subtle shake and red outline */
 .copy-hex.copy-error{outline:2px solid rgba(255,0,0,0.22);transform:translateX(-2px);}
 .copy-hex.copy-error{animation: copyErr 240ms linear 0s 1}
