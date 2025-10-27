@@ -497,8 +497,14 @@
             // fallback: execCommand
             const ta = document.createElement('textarea'); ta.value = hex; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
           }
+          // announce for screen readers
           announce(`${hex} copied to clipboard`);
-        }catch(err){ announce('Unable to copy color'); }
+          // visual confirmation: add .copied class briefly
+          try{ btn.classList.add('copied'); setTimeout(()=> btn.classList.remove('copied'), 1400); }catch(e){}
+        }catch(err){
+          announce('Unable to copy color');
+          try{ btn.classList.add('copy-error'); setTimeout(()=> btn.classList.remove('copy-error'), 1400); }catch(e){}
+        }
       });
       // keyboard activation for accessibility
       btn.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); } });

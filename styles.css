@@ -278,8 +278,50 @@ h4 { font-size: clamp(1rem, 1.6vw, 1.25rem); line-height: 1.1; }
 /* Swatch focus and copy UI */
 .swatch:focus{outline:3px solid rgba(255,0,0,0.12);outline-offset:4px}
 .swatch .swatch-hex{display:flex;gap:0.5rem;align-items:center;font-family:monospace}
-.copy-hex{background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--white);padding:0.18rem 0.45rem;border-radius:6px;font-size:0.85rem;cursor:pointer}
+.copy-hex{
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--white);
+  padding: 0.28rem 0.55rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 180ms var(--ease), transform 140ms ease, box-shadow 180ms var(--ease);
+  position: relative;
+}
 .copy-hex:focus{outline:3px solid rgba(255,0,0,0.14)}
+
+/* Copied confirmation state: temporary highlight and a small tooltip-like label */
+.copy-hex.copied{
+  background: var(--red);
+  border-color: rgba(255,0,0,0.9);
+  color: #fff;
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(255,0,0,0.12);
+}
+.copy-hex.copied::after{
+  content: 'Copied';
+  position: absolute;
+  top: -34px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.9);
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 0.28rem 0.5rem;
+  border-radius: 6px;
+  white-space:nowrap;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+.copy-hex.copied::after{opacity:1}
+
+/* error state (rare): subtle shake and red outline */
+.copy-hex.copy-error{outline:2px solid rgba(255,0,0,0.22);transform:translateX(-2px);}
+.copy-hex.copy-error{animation: copyErr 240ms linear 0s 1}
+@keyframes copyErr{20%{transform:translateX(2px)}40%{transform:translateX(-2px)}60%{transform:translateX(1px)}80%{transform:translateX(-1px)}100%{transform:translateX(0)}}
 
 /* Make image-card overlay text visible on hover or keyboard focus */
 .image-card .card-overlay{transform:translateY(100%);opacity:0}
