@@ -570,6 +570,80 @@ h4 { font-size: clamp(1rem, 1.6vw, 1.25rem); line-height: 1.1; }
 .sources-list a:hover{background:rgba(255,255,255,0.04);transform:translateY(-1px);color:var(--red)}
 .sources-dropdown.open .sources-list{display:block}
 
+/* Stronger visible red glow applied directly to the visible list so it's not
+   affected by stacking/context clipping. This adds a large blurred red shadow
+   below the list when open. */
+.sources-dropdown.open .sources-list{
+  box-shadow: 0 24px 80px rgba(255,0,0,0.22), 0 12px 40px rgba(0,0,0,0.6);
+}
+
+/* Add a subtle radial 'halo' behind the list using an ::after so it's clearly
+   red and centered beneath the list. Keeps pointer-events:none so it doesn't
+   affect interaction. */
+.sources-dropdown.open .sources-list::after{
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -28px;
+  width: 220px;
+  height: 80px;
+  background: radial-gradient(circle at 50% 30%, rgba(255,0,0,0.28) 0%, rgba(255,0,0,0.12) 30%, rgba(255,0,0,0.03) 60%, transparent 100%);
+  filter: blur(18px);
+  pointer-events: none;
+  z-index: 118;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .sources-dropdown.open .sources-list::after{ filter:none; background: rgba(255,0,0,0.06); }
+}
+
+/* Glowy blurred background for the research sources dropdown. Visible only when
+   the dropdown has the `.open` class. Uses a pseudo-element so it sits beneath
+   the dropdown content and is non-interactive. Respects reduced-motion. */
+.sources-dropdown::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  /* align the glow with the dropdown list (list is positioned with bottom) */
+  bottom: calc(100% + 8px);
+  width: calc(100% + 64px);
+  height: 76px;
+  background: radial-gradient(circle at 50% 30%, rgba(224,16,16,0.28) 0%, rgba(224,16,16,0.14) 28%, rgba(224,16,16,0.04) 56%, transparent 100%);
+  filter: blur(20px);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 119; /* sits just below the dropdown list (z-index:120) */
+  transition: opacity 260ms ease-in-out, transform 260ms ease-in-out;
+}
+
+.sources-dropdown.open::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (max-width: 640px) {
+  .sources-dropdown::before {
+    width: calc(100% + 28px);
+    height: 44px;
+    filter: blur(14px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sources-dropdown::before,
+  .sources-dropdown.open::before {
+    transition: none;
+    filter: none;
+    background: rgba(224,16,16,0.06);
+    opacity: 0.9;
+  }
+}
+
+/* Ensure the dropdown (and glow) float above nearby footer content when open */
+.sources-dropdown.open{z-index:130}
+
 /* Mobile: make dropdown behave like a stacked accordion under the button */
 @media (max-width:480px){
   .sources-list{position:static;transform:none;bottom:auto;left:auto;min-width:100%;box-shadow:none;border-radius:6px;margin-top:0.5rem;padding:0;background:rgba(0,0,0,0.96)}
