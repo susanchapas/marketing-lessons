@@ -63,7 +63,14 @@ body{
   .nav-toggle{display:flex !important;align-items:center;justify-content:center;z-index:140;width:44px;height:44px;padding:6px}
   .primary-nav{position:fixed;top:64px;right:12px;background:linear-gradient(180deg,rgba(0,0,0,0.95),rgba(0,0,0,0.98));padding:0.75rem;border-radius:8px;box-shadow:0 18px 40px rgba(0,0,0,0.6);display:none}
   .primary-nav ul{display:flex;flex-direction:column;gap:0.35rem}
-  .primary-nav[data-open="true"]{display:block}
+  .primary-nav[data-open="true"]{display:block;z-index:142; /* ensure above page content */
+    /* even red halo around the open mobile nav drawer */
+    box-shadow: 0 0 64px 20px rgba(255,0,0,0.10), 0 0 40px 10px rgba(255,0,0,0.14), 0 18px 48px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,0,0,0.08);
+  }
+  /* subtle glow on the hamburger when the menu is open */
+  .nav-toggle[aria-expanded="true"]{ box-shadow: 0 0 36px 8px rgba(255,0,0,0.12); }
+  .nav-toggle[aria-expanded="true"] .hamburger span{ background: #fff; }
   .primary-nav a{display:block;padding:0.6rem 0.9rem}
 }
 
