@@ -179,11 +179,11 @@ h4 { font-size: clamp(1rem, 1.6vw, 1.25rem); line-height: 1.1; }
   color: var(--red) !important;
 }
 
-/* Implementation panel icons (placeholders): larger, subtle drop-shadow, and hover animation */
-.panel.image svg.impl-icon{width:120px;height:120px;display:block;margin:0 auto;filter:drop-shadow(0 8px 18px rgba(0,0,0,0.6));transition:transform 220ms var(--ease),filter 220ms var(--ease),opacity 180ms}
+/* Implementation panel icons (placeholders): larger, stronger hover, and reduced-motion aware */
+.panel.image svg.impl-icon{width:120px;height:120px;display:block;margin:0 auto;filter:drop-shadow(0 8px 18px rgba(0,0,0,0.6));transition:transform 320ms var(--ease),filter 240ms var(--ease),opacity 180ms;transform-origin:center center}
 .panel.image svg.impl-icon path{fill:var(--red)}
 .panel.image:hover svg.impl-icon,
-.panel.image:focus-within svg.impl-icon{transform:translateY(-6px) scale(1.06);filter:drop-shadow(0 12px 28px rgba(0,0,0,0.65))}
+.panel.image:focus-within svg.impl-icon{transform:translateY(-8px) scale(1.28);filter:drop-shadow(0 18px 36px rgba(0,0,0,0.7))}
 #definition .trait .desc{color:rgba(255,255,255,0.95);}
 /* Archetype detail panels: keep inline styles (do not override) */
 
@@ -480,6 +480,27 @@ h4 { font-size: clamp(1rem, 1.6vw, 1.25rem); line-height: 1.1; }
 .panels{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
 .panel{background:linear-gradient(180deg,rgba(255,0,0,0.02),rgba(255,255,255,0.01));padding:1.25rem;border-radius:8px}
 .panel.image{display:flex;align-items:center;justify-content:center;height:140px}
+
+/* Generic rule to handle inline SVGs inside implementation panels (the
+   inline 88x88 SVGs). These will scale & lift on hover/focus to provide
+   a stronger interactive affordance. */
+.panel.image svg{
+  display:block;
+  margin:0 auto;
+  width:auto;
+  height:auto;
+  transition: transform 320ms var(--ease), filter 240ms var(--ease), opacity 180ms;
+  transform-origin: center center;
+}
+.panel.image:hover svg,
+.panel.image:focus-within svg{
+  transform: translateY(-10px) scale(1.28);
+  filter: drop-shadow(0 18px 36px rgba(0,0,0,0.7));
+}
+
+@media (prefers-reduced-motion: reduce){
+  .panel.image svg{ transition: none !important; transform:none !important; }
+}
 
 /* Implementation content styles */
 .implementation-content{background:linear-gradient(180deg,rgba(0,0,0,0.35),rgba(255,255,255,0.02));padding:1.25rem;margin-top:1rem;border-radius:8px}
